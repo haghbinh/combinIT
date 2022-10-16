@@ -19,4 +19,6 @@ RoxygenNote: 7.1.2
 Imports: Rcpp,mvtnorm
 LinkingTo: Rcpp, RcppArmadillo
 Depends: R (>= 4.0)
-
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
