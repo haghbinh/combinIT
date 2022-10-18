@@ -6,7 +6,7 @@
 #' @author Shenavari, Z.; Haghbin, H.; Kharrati-Kopaei, M.; Najibi, S.M.
 #' @examples \dontrun{this is an example}
 #' data(CNV)
-#' interactionplot(CNV)
+#' interaction_plot(CNV)
 #' @importFrom graphics axis legend matplot par
 #' @export
 interaction_plot <- function(x, ...) {

@@ -9,12 +9,19 @@ completed <- function(nsim) {
   structure(out, class = "completed")
 }
 
-nextc <- function(x, i) {
-  UseMethod("nextc")
-}
+# nextc <- function(x, i) {
+#   UseMethod("nextc")
+# }
 
-nextc.completed <- function(x, i) {
+# nextc.completed <- function(x, i) {
+#   message(x$lab[x$j], " completed")
+#   x$j <- x$j + 1
+#   return(x)
+# }
+
+nextc <- function(x, i) {
   message(x$lab[x$j], " completed")
   x$j <- x$j + 1
+  structure(x, class = "nextc")
   return(x)
 }

@@ -13,7 +13,7 @@ CPI_test(x, nsim = 10000, nc0 = 10000, Elapsed_time = TRUE)
 
 \item{nc0}{a numeric value, the number of Monte Carlo samples for computing the unbiasing constant \eqn{c_0}. The default value is 10000.}
 
-\item{Elapsed.time}{logical: if \code{TRUE} the progress will be printed in the console.}
+\item{Elapsed_time}{logical: if \code{TRUE} the progress will be printed in the console.}
 }
 \value{
 An object of the class \code{combtest}, which is a list inducing following components::

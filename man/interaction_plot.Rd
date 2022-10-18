@@ -20,7 +20,7 @@ Interaction Plot
 \examples{
 \dontrun{this is an example}
 data(CNV)
-interactionplot(CNV)
+interaction_plot(CNV)
 }
 \author{
 Shenavari, Z.; Haghbin, H.; Kharrati-Kopaei, M.; Najibi, S.M.
