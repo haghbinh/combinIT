@@ -9,7 +9,7 @@
 #' interactionplot(CNV)
 #' @importFrom graphics axis legend matplot par
 #' @export
-interactionplot <- function(x, ...) {
+interaction_plot <- function(x, ...) {
   if (!is.matrix(x)) {
     stop("The input should be a matrix")
   } else {

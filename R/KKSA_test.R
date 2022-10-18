@@ -5,7 +5,7 @@
 #' @param x numeric matrix, \eqn{b \times a} data matrix where the number of rows and columns are corresponding to the block and treatment levels
 #'   , respectively.
 #' @param nsim a numeric value, the number of Monte Carlo samples for computing an exact Monte Carlo p-value. The default value is 10000.
-#' @param Elapsed.time logical: if \code{TRUE} the progress will be printed in the console.
+#' @param Elapsed_time logical: if \code{TRUE} the progress will be printed in the console.
 #' @details  Suppose that \eqn{b>=3} and \eqn{b>=4}. Consider the \eqn{l}-th division of the data table into two sub-tables,
 #'  obtained by putting \eqn{b_1} (\eqn{2<U+2264>b_1<U+2264>b-2}) rows in the first sub-table and the remaining \eqn{b_2} rows in the second sub-table (\eqn{b_1+b_2=a}).
 #'  Let RSS1 and RSS2 denote the residual sum of squares for these two sub-tables, respectively. For a particular division \eqn{l}, let \eqn{F_l=max<U+2061>(F_l,1/F_l }
@@ -15,11 +15,11 @@
 #'  rows or columns. This test procedure is powerful for detecting interaction when the magnitude of interaction effects is heteroscedastic across the sub-tables of observations.
 
 #' @return An object of the class \code{ITtest}, which is a list inducing following components::
-#' \item{pvalue.exact}{The calculated exact Monte Carlo p-value.}
-#' \item{pvalue.appro}{The Bonferroni-adjusted p-value is calculated.}
+#' \item{pvalue_exact}{The calculated exact Monte Carlo p-value.}
+#' \item{pvalue_appro}{The Bonferroni-adjusted p-value is calculated.}
 #' \item{statistic}{The value of the test statistic.}
 #' \item{Nsim}{The number of Monte Carlo samples that are used to estimate p-value.}
-#' \item{data.name}{The name of the input dataset.}
+#' \item{data_name}{The name of the input dataset.}
 #' \item{test}{The name of the test.}
 #'
 #'
@@ -33,10 +33,10 @@
 #'
 #' @examples
 #' data(IDCP)
-#' KKSA.test(IDCP, nsim = 1000, Elapsed.time = FALSE)
+#' KKSA_test(IDCP, nsim = 1000, Elapsed_time = FALSE)
 #' 
 #' @export
-KKSA.test <- function(x, nsim = 10000, Elapsed.time = TRUE) {
+KKSA_test <- function(x, nsim = 10000, Elapsed_time = TRUE) {
   if (!is.matrix(x)) {
     stop("The input should be a matrix")
   } else {
@@ -54,17 +54,17 @@ KKSA.test <- function(x, nsim = 10000, Elapsed.time = TRUE) {
     if (bl < 4) {
       warning("KKSA needs at least 4 levels for a factor")
       out <- list(
-        pvalue.exact = NA,
-        pvalue.appro = NA,
+        pvalue_exact = NA,
+        pvalue_appro = NA,
         nsim = nsim,
         statistic = NA,
-        data.name = DNAME,
+        data_name = DNAME,
         test = "KKSA Test")
     } else {
       cck <- 2^(bl - 1) - 1 - bl
       statistics <- kk_f(x)
       simu <- rep(0, 0)
-      if (Elapsed.time) {
+      if (Elapsed_time) {
         pb <- completed(nsim)
         for (i in 1:nsim) {
           simu[i] <- kk_f(matrix(rnorm(n), nrow = bl))
@@ -75,15 +75,15 @@ KKSA.test <- function(x, nsim = 10000, Elapsed.time = TRUE) {
           simu[i] <- kk_f(matrix(rnorm(n), nrow = bl))
         }
       }
-      KKSA.p <- mean(statistics > simu)
-      KKSA.p.apr <- statistics * cck
-      KKSA.p.apr <- min(1, KKSA.p.apr)
+      KKSA_p <- mean(statistics > simu)
+      KKSA_p_apr <- statistics * cck
+      KKSA_p_apr <- min(1, KKSA_p_apr)
       out <- list(
-        pvalue.exact = KKSA.p,
-        pvalue.appro = KKSA.p.apr,
+        pvalue_exact = KKSA_p,
+        pvalue_appro = KKSA_p_apr,
         nsim = nsim,
         statistic = statistics,
-        data.name = DNAME,
+        data_name = DNAME,
         test = "KKSA Test"
       )
     }

@@ -4,14 +4,14 @@
 #'
 #' @param x numeric matrix, \eqn{b \times a} data matrix where the number of rows and columns are corresponding to the block and treatment levels, respectively.
 #' @param nsim a numeric value, the number of Monte Carlo samples for computing an exact Monte Carlo p-value. The default value is 10000.
-#' @param Elapsed.time logical: if \code{TRUE} the progress will be printed in the console.
+#' @param Elapsed_time logical: if \code{TRUE} the progress will be printed in the console.
 #' 
 #' @return An object of the class \code{ITtest}, which is a list inducing following components:
-#' \item{pvalue.exact}{The calculated exact Monte Carlo p-value.}
-#' \item{pvalue.appro}{is not available for \code{Malik.test}.}
+#' \item{pvalue_exact}{The calculated exact Monte Carlo p-value.}
+#' \item{pvalue_appro}{is not available for \code{Malik_test}.}
 #' \item{statistic}{The value of the test statistic.}
 #' \item{Nsim}{The number of Monte Carlo samples that are used to estimate p-value.}
-#' \item{data.name}{The name of the input dataset.}
+#' \item{data_name}{The name of the input dataset.}
 #' \item{test}{The name of the test.}
 #' 
 #' @details
@@ -32,10 +32,10 @@
 #' 
 #' @examples
 #' data(IDCP)
-#' Malik.test(IDCP, nsim = 1000, Elapsed.time = FALSE)
+#' Malik_test(IDCP, nsim = 1000, Elapsed_time = FALSE)
 #' 
 #' @export
-Malik.test <- function(x, nsim = 10000, Elapsed.time = TRUE) {
+Malik_test <- function(x, nsim = 10000, Elapsed_time = TRUE) {
   if (!is.matrix(x)) {
     stop("The input should be a matrix")
   } else {
@@ -48,7 +48,7 @@ Malik.test <- function(x, nsim = 10000, Elapsed.time = TRUE) {
     y <- c(t(x))
     statistic <- M_f(x)
     simu <- rep(0, 0)
-    if (Elapsed.time) {
+    if (Elapsed_time) {
       pb <- completed(nsim)
       for (i in 1:nsim) {
         x0 <- matrix(rnorm(n), nrow = bl)
@@ -66,11 +66,11 @@ Malik.test <- function(x, nsim = 10000, Elapsed.time = TRUE) {
     malik <- mean(statistic < simu)
     structure(
       list(
-        pvalue.exact = malik,
-        pvalue.appro = "NULL",
+        pvalue_exact = malik,
+        pvalue_appro = "NULL",
         nsim = nsim,
         statistic = statistic,
-        data.name = DNAME,
+        data_name = DNAME,
         test = "Malik Test"
       ),
       class = "ITtest"

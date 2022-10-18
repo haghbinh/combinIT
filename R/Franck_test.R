@@ -5,7 +5,7 @@
 #' @param x numeric matrix, \eqn{b \times a} data matrix where the number of rows and columns are corresponding to the block and treatment levels
 #'   , respectively.
 #' @param nsim a numeric value, the number of Monte Carlo samples for computing an exact Monte Carlo p-value. The default value is 10000.
-#' @param Elapsed.time logical: if \code{TRUE} the progress will be printed in the console.
+#' @param Elapsed_time logical: if \code{TRUE} the progress will be printed in the console.
 #'
 #' @details Franck et al. (2013) derived a test statistic based on the “hidden additivity” structure.
 #'  They defined this structure as “the levels of one factor belong in two or more groups such that within each group the effects of the two factors are additive but the groups may interact with the ungrouped factor”.
@@ -16,11 +16,11 @@
 #'
 #'
 #' @return An object of the class \code{ITtest}, which is a list inducing following components::
-#' \item{pvalue.exact}{The calculated exact Monte Carlo p-value.}
-#' \item{pvalue.appro}{The Bonferroni-adjusted p-value is calculated.}
+#' \item{pvalue_exact}{The calculated exact Monte Carlo p-value.}
+#' \item{pvalue_appro}{The Bonferroni-adjusted p-value is calculated.}
 #' \item{statistic}{The value of the test statistic.}
 #' \item{Nsim}{The number of Monte Carlo samples that are used to estimate p-value.}
-#' \item{data.name}{The name of the input dataset.}
+#' \item{data_name}{The name of the input dataset.}
 #' \item{test}{The name of the test.}
 #'
 #'
@@ -37,11 +37,11 @@
 #'
 #' @examples
 #' data(CNV)
-#' Franck.test(CNV, nsim = 1000, Elapsed.time = FALSE)
+#' Franck_test(CNV, nsim = 1000, Elapsed_time = FALSE)
 #' 
 #' @importFrom stats pchisq pf qnorm var
 #' @export
-Franck.test <- function(x, nsim = 10000, Elapsed.time = TRUE) {
+Franck_test <- function(x, nsim = 10000, Elapsed_time = TRUE) {
   DNAME <- deparse1(substitute(x))
   if (!is.matrix(x)) {
     stop("The input should be a matrix")
@@ -59,7 +59,7 @@ Franck.test <- function(x, nsim = 10000, Elapsed.time = TRUE) {
     cch <- 2^(bl - 1) - 1
     statistics <- hh_f(x)
     simu <- rep(0, 0)
-    if (Elapsed.time) {
+    if (Elapsed_time) {
       pb <- completed(nsim)
       for (i in 1:nsim) {
         simu[i] <- hh_f(matrix(rnorm(n), nrow = bl, ncol = tr))
@@ -72,13 +72,13 @@ Franck.test <- function(x, nsim = 10000, Elapsed.time = TRUE) {
     }
     hidden <- mean(statistics < simu)
     adjpvalue <- (1 - pf(statistics, (tr - 1), (tr - 1) * (bl - 2))) * cch
-    hidden.apr <- min(1, adjpvalue)
+    hidden_apr <- min(1, adjpvalue)
     out <- list(
-      pvalue.exact = hidden,
-      pvalue.appro = hidden.apr,
+      pvalue_exact = hidden,
+      pvalue_appro = hidden_apr,
       nsim = nsim,
       statistic = statistics,
-      data.name = DNAME,
+      data_name = DNAME,
       test = "Franck Test"
     )
     structure(out, class = "ITtest")

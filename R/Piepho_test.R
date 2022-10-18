@@ -8,11 +8,11 @@
 #'
 #'
 #' @return An object of the class \code{ITtest}, which is a list inducing following components:
-#' \item{pvalue.exact}{The calculated exact Monte Carlo p-value.}
-#' \item{pvalue.appro}{The asymptotic p-value.}
+#' \item{pvalue_exact}{The calculated exact Monte Carlo p-value.}
+#' \item{pvalue_appro}{The asymptotic p-value.}
 #' \item{statistic}{The value of the test statistic.}
 #' \item{Nsim}{The number of Monte Carlo samples that are used to estimate p-value.}
-#' \item{data.name}{The name of the input dataset.}
+#' \item{data_name}{The name of the input dataset.}
 #' \item{test}{The name of the test.}
 #' @details Piepho (1994) proposed three test statistics.The third one is
 #'  based on Grubbs’ (1948) type estimator of variance for each level of block effect.
@@ -30,10 +30,10 @@
 #'
 #' @examples
 #' data(MVGH)
-#' Piepho.test(MVGH, nsim = 1000)
+#' Piepho_test(MVGH, nsim = 1000)
 #' 
 #' @export
-Piepho.test <- function(x, nsim = 10000) {
+Piepho_test <- function(x, nsim = 10000) {
   if (!is.matrix(x)) {
     stop("The input should be a matrix")
   } else {
@@ -47,11 +47,11 @@ Piepho.test <- function(x, nsim = 10000) {
     df <- bl - 1
     asypieph <- 1 - pchisq(statistics, df = df)
     out <- list(
-      pvalue.exact = pieph,
-      pvalue.appro = asypieph,
+      pvalue_exact = pieph,
+      pvalue_appro = asypieph,
       nsim = nsim,
       statistic = statistics,
-      data.name = DNAME,
+      data_name = DNAME,
       test = "Piepho Test"
     )
   }

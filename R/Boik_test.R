@@ -1,7 +1,7 @@
 #' Boik's (1993) Locally Best Invariant (LBI) Test
 #'
 #' This function calculates the LBI test statistic for testing the null hypothesis \eqn{H_0:} there is no interaction.
-#' It returns an exact p-value when \eqn{p=2}. It returns an exact Monte Carlo p-value when \eqn{p>2}. It also provides an asymptotic chi-squared p-value. Note that the p-value of the Boik.test is always 1 when \eqn{p=1}.
+#' It returns an exact p-value when \eqn{p=2}. It returns an exact Monte Carlo p-value when \eqn{p>2}. It also provides an asymptotic chi-squared p-value. Note that the p-value of the Boik_test is always 1 when \eqn{p=1}.
 #'
 #' @param x a numeric matrix, \eqn{b \times a} data matrix where the number of row and column are corresponding to the number of block and treatment levels, respectively.
 #' @param nsim a numeric value, the number of Monte Carlo samples for calculating an exact Monte Carlo p-value. The default value is 10000.
@@ -32,10 +32,10 @@
 #'
 #' @examples
 #' data(MVGH)
-#' Boik.test(MVGH, nsim = 1000)
+#' Boik_test(MVGH, nsim = 1000)
 #' @importFrom stats median pbeta rnorm
 #' @export
-Boik.test <- function(x, nsim = 10000) {
+Boik_test <- function(x, nsim = 10000) {
   if (!is.matrix(x)) {
     stop("The input should be a matrix")
   } else {

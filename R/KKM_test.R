@@ -8,11 +8,11 @@
 #' @param nc0 a numeric value, the number of Monte Carlo samples for computing the unbiasing constant \eqn{c_0}. The default value is 10000.
 #'
 #' @return An object of the class \code{ITtest}, which is a list inducing following components::
-#' \item{pvalue.exact}{The calculated exact Monte Carlo p-value.}
-#' \item{pvalue.appro}{is not available for \code{KKM.test}.}
+#' \item{pvalue_exact}{The calculated exact Monte Carlo p-value.}
+#' \item{pvalue_appro}{is not available for \code{KKM_test}.}
 #' \item{Nsim}{The number of Monte Carlo samples that are used to estimate p-value.}
 #' \item{statistic}{The value of the test statistic.}
-#' \item{data.name}{The name of the input dataset.}
+#' \item{data_name}{The name of the input dataset.}
 #' \item{test}{The name of the test.}
 #'
 #' @details
@@ -32,10 +32,10 @@
 
 #' @examples
 #' data(RDWW)
-#' KKM.test(RDWW, nsim = 1000, nc0 = 1000)
+#' KKM_test(RDWW, nsim = 1000, nc0 = 1000)
 #' 
 #' @export
-KKM.test <- function(x, nsim = 1000, nc0 = 10000) {
+KKM_test <- function(x, nsim = 1000, nc0 = 10000) {
   if (!is.matrix(x)) {
     stop("The input should be a matrix")
   } else {
@@ -52,11 +52,11 @@ KKM.test <- function(x, nsim = 1000, nc0 = 10000) {
   }
   structure(
     list(
-      pvalue.exact = PIC,
-      pvalue.appro = "NULL",
+      pvalue_exact = PIC,
+      pvalue_appro = "NULL",
       nsim = nsim,
       statistic = statistics,
-      data.name = DNAME,
+      data_name = DNAME,
       test = "KKM Test"
     ),
     class = "ITtest"

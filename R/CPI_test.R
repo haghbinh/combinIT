@@ -17,23 +17,23 @@
 #'
 #' @return An object of the class \code{combtest}, which is a list inducing following components::
 #' \item{nsim}{The number of Monte Carlo samples that are used to estimate p-value.}
-#' \item{Piepho.pvalue}{The p-value of Piepho's (1994) test.}
-#' \item{Piepho.Stat}{The value of Piepho's (1994) test statistic.}
-#' \item{Boik.pvalue}{The p-value of Boik's (1993) test.}
-#' \item{Boik.Stat}{The value of Boik's (1993) test statistic.}
-#' \item{Malik.pvalue}{The p-value of Malik's (2016) et al. test.}
-#' \item{alik.Stat}{The value of Malik's (2016) et al. test statistic.}
-#' \item{KKM.pvalue}{The p-value of Kharrati-Kopaei and Miller's (2016) test.}
-#' \item{KKM.Stat}{The value of Kharrati-Kopaei and Miller's (2016) test statistic.}
-#' \item{KKSA.pvalue}{The p-value of Kharrati-Kopaei and Sadooghi-Alvandi's (2007) test.}
-#' \item{KKSA.Stat}{The value of Kharrati-Kopaei and Sadooghi-Alvandi's (2007) test statistic.}
-#' \item{Franck.pvalue}{The p-value of Franck's (2013) et al. test.}
-#' \item{Franck.Stat}{The value of Franck's (2013) et al. test statistic.}
+#' \item{Piepho_pvalue}{The p-value of Piepho's (1994) test.}
+#' \item{Piepho_Stat}{The value of Piepho's (1994) test statistic.}
+#' \item{Boik_pvalue}{The p-value of Boik's (1993) test.}
+#' \item{Boik_Stat}{The value of Boik's (1993) test statistic.}
+#' \item{Malik_pvalue}{The p-value of Malik's (2016) et al. test.}
+#' \item{alik_Stat}{The value of Malik's (2016) et al. test statistic.}
+#' \item{KKM_pvalue}{The p-value of Kharrati-Kopaei and Miller's (2016) test.}
+#' \item{KKM_Stat}{The value of Kharrati-Kopaei and Miller's (2016) test statistic.}
+#' \item{KKSA_pvalue}{The p-value of Kharrati-Kopaei and Sadooghi-Alvandi's (2007) test.}
+#' \item{KKSA_Stat}{The value of Kharrati-Kopaei and Sadooghi-Alvandi's (2007) test statistic.}
+#' \item{Franck_pvalue}{The p-value of Franck's (2013) et al. test.}
+#' \item{Franck_Stat}{The value of Franck's (2013) et al. test statistic.}
 #' \item{Bonferroni}{The combined p-value by using the Bonferroni method.}
 #' \item{Sidak}{The combined p-value by using the Sidak method.}
 #' \item{Jacobi}{The combined p-value by using the Jacobi method.}
 #' \item{GC}{The combined p-value by using the Gaussian copula.}
-#' \item{data.name}{The name of the input dataset.}
+#' \item{data_name}{The name of the input dataset.}
 #' \item{test}{The name of the test.}
 #' 
 #'
@@ -43,11 +43,11 @@
 #'  
 #' @examples
 #' data(RDWW)
-#' CPI.test(RDWW, nsim = 1000, Elapsed.time = FALSE)
+#' CPI_test(RDWW, nsim = 1000, Elapsed_time = FALSE)
 #' 
 #' @importFrom stats pchisq pf qnorm var
 #' @export
-CPI.test <- function(x, nsim = 10000, nc0 = 10000, Elapsed.time = TRUE) {
+CPI_test <- function(x, nsim = 10000, nc0 = 10000, Elapsed_time = TRUE) {
   if (!is.matrix(x)) {
     stop("The input should be a matrix")
   } else {
@@ -63,7 +63,7 @@ CPI.test <- function(x, nsim = 10000, nc0 = 10000, Elapsed.time = TRUE) {
       tr <- te
     }
     if (bl <= 3) {
-      warning("KKSA.test needs at least 4 levels for a factor. For combining pvalues, the pvalue of KKSA method is not considered.")
+      warning("KKSA_test needs at least 4 levels for a factor. For combining pvalues, the pvalue of KKSA method is not considered.")
     }
     n <- tr * bl
     block <- gl(bl, tr)
@@ -90,7 +90,7 @@ CPI.test <- function(x, nsim = 10000, nc0 = 10000, Elapsed.time = TRUE) {
       Hstat <- kh$fmax
     }
     Bsimu <- Msimu <- psimu <- pisimu <- Hsimu <- rep(0, 0)
-    if (Elapsed.time) {
+    if (Elapsed_time) {
       pb <- completed(nsim)
       for (i in 1:nsim) {
         y <- rnorm(n)
@@ -129,24 +129,24 @@ CPI.test <- function(x, nsim = 10000, nc0 = 10000, Elapsed.time = TRUE) {
     }
     Tb <- (1 / Bstat - 1)
     if (p == 1) {
-      Boik.pvalue <- 1
+      Boik_pvalue <- 1
     }
     if (p == 2) {
-      Boik.pvalue <- 1 - pbeta(Tb, 1, (q - 1) / 2)
+      Boik_pvalue <- 1 - pbeta(Tb, 1, (q - 1) / 2)
     }
     if (p > 2) {
-      Boik.pvalue <- mean(Bstat >= Bsimu)
+      Boik_pvalue <- mean(Bstat >= Bsimu)
     }
-    piepho.pvalue <- mean(pistat < pisimu)
-    PIC.pvalue <- mean(pstat < psimu)
-    Malik.pvalue <- mean(Mstat < Msimu)
-    hiddenf.pvalue <- mean(Hstat < Hsimu)
+    piepho_pvalue <- mean(pistat < pisimu)
+    PIC_pvalue <- mean(pstat < psimu)
+    Malik_pvalue <- mean(Mstat < Msimu)
+    hiddenf_pvalue <- mean(Hstat < Hsimu)
     if (bl <= 3) {
-      KKSA.pvalue <- NA
+      KKSA_pvalue <- NA
     } else {
-      KKSA.pvalue <- mean(Kstat > Ksimu)
+      KKSA_pvalue <- mean(Kstat > Ksimu)
     }
-    pvalues <- c(Boik.pvalue, piepho.pvalue, hiddenf.pvalue, Malik.pvalue, PIC.pvalue, KKSA.pvalue)
+    pvalues <- c(Boik_pvalue, piepho_pvalue, hiddenf_pvalue, Malik_pvalue, PIC_pvalue, KKSA_pvalue)
     if (bl <= 3) {
       pvalues <- pvalues[!is.na(pvalues)]
     } else {
@@ -160,44 +160,44 @@ CPI.test <- function(x, nsim = 10000, nc0 = 10000, Elapsed.time = TRUE) {
     if (cp$Bon >= 0.05 & cp$GC >= 0.05 & cp$Sidak >= 0.05 & cp$jacobi >= 0.05) message("No significant interaction type was detected at the 5% level")
     if ((cp$Bon < 0.05 | cp$Sidak < 0.05 | cp$jacobi < 0.05) & bl >= 4) {
       message("There are significant interaction types at the 5% level")
-      if (min(pvalues) == Boik.pvalue) message("The multiplicative form of interaction migth exist")
-      if (min(pvalues) == piepho.pvalue) message("The detected significant interaction might due to the Grubbs type estimators of variances are heterogeneous across the levels of one factor")
-      if (min(pvalues) == hiddenf.pvalue) message("A hidden structure of intercation might exist")
-      if (min(pvalues) == Malik.pvalue) message("Some cells produce large negative or positive residuals due to the significant interaction")
-      if (min(pvalues) == PIC.pvalue) message("Significant interactions are caused by some cells")
-      if (min(pvalues) == KKSA.pvalue) message("The magnitude of interaction effects is heteroscedastic across the sub-tables of observations")
+      if (min(pvalues) == Boik_pvalue) message("The multiplicative form of interaction migth exist")
+      if (min(pvalues) == piepho_pvalue) message("The detected significant interaction might due to the Grubbs type estimators of variances are heterogeneous across the levels of one factor")
+      if (min(pvalues) == hiddenf_pvalue) message("A hidden structure of intercation might exist")
+      if (min(pvalues) == Malik_pvalue) message("Some cells produce large negative or positive residuals due to the significant interaction")
+      if (min(pvalues) == PIC_pvalue) message("Significant interactions are caused by some cells")
+      if (min(pvalues) == KKSA_pvalue) message("The magnitude of interaction effects is heteroscedastic across the sub-tables of observations")
     }
     if ((cp$Bon < 0.05 | cp$Sidak < 0.05 | cp$jacobi < 0.05) & bl < 4) {
       message("There are significant interaction types at the 5% level")
-      if (min(pvalues) == Boik.pvalue) message("The multiplicative form of interaction migth exist")
-      if (min(pvalues) == piepho.pvalue) message("The detected significant interaction might due to the Grubbs type estimators of variances are heterogeneous across the levels of one factor")
-      if (min(pvalues) == hiddenf.pvalue) message("A hidden structure of intercation might exist")
-      if (min(pvalues) == Malik.pvalue) message("Some cells produce large negative or positive residuals due to the significant interaction")
-      if (min(pvalues) == PIC.pvalue) message("Significant interactions are caused by some cells")
+      if (min(pvalues) == Boik_pvalue) message("The multiplicative form of interaction migth exist")
+      if (min(pvalues) == piepho_pvalue) message("The detected significant interaction might due to the Grubbs type estimators of variances are heterogeneous across the levels of one factor")
+      if (min(pvalues) == hiddenf_pvalue) message("A hidden structure of intercation might exist")
+      if (min(pvalues) == Malik_pvalue) message("Some cells produce large negative or positive residuals due to the significant interaction")
+      if (min(pvalues) == PIC_pvalue) message("Significant interactions are caused by some cells")
     }
     if (bl < 4) {
-      KKSA.pvalue <- NA
+      KKSA_pvalue <- NA
       Kstat <- NA
     } 
     out <- list(
       nsim = nsim,
-      Piepho.pvalue = piepho.pvalue,
-      Piepho.Stat = pistat,
-      Boik.pvalue = Boik.pvalue,
-      Boik.Stat = Bstat,
-      Malik.pvalue = Malik.pvalue,
-      Malik.Stat = Mstat,
-      KKM.pvalue = PIC.pvalue,
-      KKM.Stat = pstat,
-      KKSA.pvalue = KKSA.pvalue,
-      KKSA.Stat = Kstat,
-      Franck.pvalue = hiddenf.pvalue,
-      Franck.Stat = Hstat,
+      Piepho_pvalue = piepho_pvalue,
+      Piepho_Stat = pistat,
+      Boik_pvalue = Boik_pvalue,
+      Boik_Stat = Bstat,
+      Malik_pvalue = Malik_pvalue,
+      Malik_Stat = Mstat,
+      KKM_pvalue = PIC_pvalue,
+      KKM_Stat = pstat,
+      KKSA_pvalue = KKSA_pvalue,
+      KKSA_Stat = Kstat,
+      Franck_pvalue = hiddenf_pvalue,
+      Franck_Stat = Hstat,
       Bonferroni = Bonferroni,
       Sidak = Sidak,
       Jacobi = jacobi,
       GC = GC,
-      data.name = DNAME,
+      data_name = DNAME,
       test = "Combined p-value interaction Test"
     )
     structure(out, class = "combtest")

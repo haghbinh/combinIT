@@ -4,7 +4,7 @@
 #'
 #' @keywords internal
 #'
-B.f <- function(x, p) {
+B_f <- function(x, p) {
   RES <- t(t(x - apply(x, 1, mean) + mean(x)) - apply(x, 2, mean))
   EE1 <- crossprod(RES)
   EE2 <- EE1 %*% EE1
