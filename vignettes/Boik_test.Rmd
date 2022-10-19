@@ -1,0 +1,21 @@
+---
+title: "Boik_test"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Boik_test}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+The LBI test statistic is 
+$$T_B=(tr(R'R))^2/(p tr((R'R)^2))$$
+where $p=min{a-1,b-1}$ and $R$ is the residual matrix of the input data matrix, $x$, under the null hypothesis $H_0:$ there is no interaction. This test rejects the null hypothesis of no interaction when \eqn{T_B93} is small.   Boik (1993) provided the exact distribution of \eqn{T_B93} when \eqn{p=2} under \eqn{H_0}. In addition, he provided an asymptotic approximation of \eqn{T_B93} under \eqn{H_0} when \eqn{q} tends to infinity where \eqn{q=max{a-1,b-1}}.  Note that the LBI test is powerful when the \eqn{a \times b} matrix of interaction terms has small rank and one singular value dominates the remaining singular values or  in practice, if the largest eigenvalue of \eqn{RR'} is expected to dominate the remaining eigenvalues.
+```{r setup}
+library(combinIT)
+```

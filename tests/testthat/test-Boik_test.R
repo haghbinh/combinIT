@@ -1,3 +1,4 @@
+x <- Boik_test(MVGH, nsim = 10000)
 test_that("Boik_test works", {
-  expect_true(abs(Boik_test(MVGH, nsim = 1000)$statistic-0.50012362)<0.001,)
+  expect_true(x$pvalue_exact<0.05)
 })
