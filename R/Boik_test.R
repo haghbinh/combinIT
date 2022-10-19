@@ -8,10 +8,10 @@
 #'
 #' @return An object of the class \code{ITtest}, which is a list inducing following components::
 #' \item{pvalue.exact}{An exact Monte Carlo p-value when \eqn{p>2}. For \eqn{p=2} an exact p-value is calculated.}
-#' \item{pvalue.appro}{An chi-squared asymptotic p-value.}
+#' \item{pvalue_appro}{An chi-squared asymptotic p-value.}
 #' \item{statistic}{The value of test statistic.}
 #' \item{Nsim}{The number of Monte Carlo samples that are used to estimate p-value.}
-#' \item{data.name}{The name of the input dataset.}
+#' \item{data_name}{The name of the input dataset.}
 #' \item{test}{The name of the test.}
 #'
 #'
@@ -50,25 +50,25 @@ Boik_test <- function(x, nsim = 10000) {
     T0 <- p * q * Tb / 2
     df <- (p + 2) * (p - 1) / 2
     if (p == 1) {
-      asyboik.p <- 1
+      asyboik_p <- 1
       simu <- Bfsim(nsim, bl, tr, p)
-      boik.p <- mean(statistics >= simu)
+      boik_p <- mean(statistics >= simu)
     }
     if (p > 2) {
       simu <- Bfsim(nsim, bl, tr, p)
-      boik.p <- mean(statistics >= simu)
-      asyboik.p <- 1 - pchisq(T0, df)
+      boik_p <- mean(statistics >= simu)
+      asyboik_p <- 1 - pchisq(T0, df)
     }
     if (p == 2) {
-      boik.p <- 1 - pbeta(Tb, 1, (q - 1) / 2)
-      asyboik.p <- 1 - pchisq(T0, df)
+      boik_p <- 1 - pbeta(Tb, 1, (q - 1) / 2)
+      asyboik_p <- 1 - pchisq(T0, df)
     }
     out <- list(
-      pvalue.exact = boik.p,
-      pvalue.appro = asyboik.p,
+      pvalue_exact = boik_p,
+      pvalue_appro = asyboik_p,
       nsim = nsim,
       statistic = statistics,
-      data.name = DNAME,
+      data_name = DNAME,
       test = "Boik Test"
     )
   }

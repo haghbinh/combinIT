@@ -1,0 +1,10 @@
+data(RDWW)
+x <- CPI_test(RDWW, nsim = 1000, Elapsed_time = FALSE)
+test_that("CPI_test works", {
+  expect_equal(x$Piepho_Stat, 13.70676)
+  expect_equal(x$Boik_Stat, 0.363328)
+  expect_equal(x$Malik_Stat, 57.78827)
+  expect_equal(x$KKM_Stat, 7.8372093)
+  expect_equal(x$KKM_Stat, 0.01131)
+  expect_equivalent(x$Malik_Stat, 20.24516)
+})

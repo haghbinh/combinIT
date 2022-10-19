@@ -14,10 +14,10 @@ Boik_test(x, nsim = 10000)
 \value{
 An object of the class \code{ITtest}, which is a list inducing following components::
 \item{pvalue.exact}{An exact Monte Carlo p-value when \eqn{p>2}. For \eqn{p=2} an exact p-value is calculated.}
-\item{pvalue.appro}{An chi-squared asymptotic p-value.}
+\item{pvalue_appro}{An chi-squared asymptotic p-value.}
 \item{statistic}{The value of test statistic.}
 \item{Nsim}{The number of Monte Carlo samples that are used to estimate p-value.}
-\item{data.name}{The name of the input dataset.}
+\item{data_name}{The name of the input dataset.}
 \item{test}{The name of the test.}
 }
 \description{
