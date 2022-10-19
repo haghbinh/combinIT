@@ -1,5 +1,5 @@
-x <- CPI_test(RDWW, nsim = 1000, Elapsed_time = FALSE)
-test_that("CPI_test works", {
+x <- CI_test(RDWW, nsim = 1000, Elapsed_time = FALSE)
+test_that("CI_test works", {
   expect_true(x$Piepho_pvalue<0.05)
   expect_true(x$Boik_pvalue<0.05)
   expect_true(x$KKM_pvalue<0.05)

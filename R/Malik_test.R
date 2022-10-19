@@ -4,16 +4,16 @@
 #'
 #' @param x numeric matrix, \eqn{a \times b} data matrix where the number of row and column is corresponding to the number of factor levels.
 #' @param nsim a numeric value, the number of Monte Carlo samples for computing an exact Monte Carlo p-value. The default value is 10000.
-#' @param Elapsed.time logical: if \code{TRUE} the progress will be printed in the console.
+#' @param Elapsed_time logical: if \code{TRUE} the progress will be printed in the console.
 #' @param alpha a numeric value, the level of the test. The default value is 0.05.
 #' @param report logical: if \code{TRUE} the result of the test is reported at the \code{alpha} level.
 #'
 #' @return An object of the class \code{ITtest}, which is a list inducing following components:
-#' \item{pvalue.exact}{The calculated exact Monte Carlo p-value.}
-#' \item{pvalue.appro}{is not available for \code{Malik.test}.}
+#' \item{pvalue_exact}{The calculated exact Monte Carlo p-value.}
+#' \item{pvalue_appro}{is not available for \code{Malik_test}.}
 #' \item{statistic}{The value of the test statistic.}
 #' \item{Nsim}{The number of Monte Carlo samples that are used to estimate p-value.}
-#' \item{data.name}{The name of the input dataset.}
+#' \item{data_name}{The name of the input dataset.}
 #' \item{test}{The name of the test.}
 #' \item{Level}{The level of test.}
 #' \item{Result}{The result of the test at the alpha level with some descriptions on the type of significant interaction.}
@@ -37,10 +37,10 @@
 #' @examples
 #' \dontrun{
 #' data(IDCP)
-#' Malik.test(IDCP, nsim = 1000, Elapsed.time = FALSE)
+#' Malik_test(IDCP, nsim = 1000, Elapsed_time = FALSE)
 #'}
 #' @export
-Malik.test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE, Elapsed.time = TRUE) {
+Malik_test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE, Elapsed_time = TRUE) {
   if (!is.matrix(x)) {
     stop("The input should be a matrix")
   } else {
@@ -53,7 +53,7 @@ Malik.test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE, Elapsed.tim
     y <- c(t(x))
     statistic <- M_f(x)
     simu <- rep(0, 0)
-    if (Elapsed.time) {
+    if (Elapsed_time) {
       pb <- completed(nsim)
       for (i in 1:nsim) {
         x0 <- matrix(rnorm(n), nrow = bl)
@@ -72,20 +72,20 @@ Malik.test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE, Elapsed.tim
     qMalik <- quantile(simu, prob = 1 - alpha, names = FALSE)
     if (report) {
       if (malik < alpha) {
-        str <- Result.Malik(x, simu = simu, alpha = alpha, nsim = nsim)
+        str <- Result_Malik(x, simu = simu, alpha = alpha, nsim = nsim)
       } else {
-        str <- paste("The Malik.test could not detect any significant interaction.", "The estimated critical value of the Malik.test with", nsim, "Monte Carlo samples is", round(qMalik, 4), ".")
+        str <- paste("The Malik_test could not detect any significant interaction.", "The estimated critical value of the Malik_test with", nsim, "Monte Carlo samples is", round(qMalik, 4), ".")
       }
     } else {
       str <- paste("A report has not been wanted! To have a report, change argument 'report' to TRUE.")
     }
     structure(
       list(
-        pvalue.exact = malik,
-        pvalue.appro = "NULL",
+        pvalue_exact = malik,
+        pvalue_appro = "NULL",
         nsim = nsim,
         statistic = statistic,
-        data.name = DNAME,
+        data_name = DNAME,
         test = "Malik Test",
         Level = alpha,
         Result = str

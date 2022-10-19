@@ -4,7 +4,7 @@
 #'
 #' @param x numeric matrix, \eqn{a \times b} data matrix where the number of row and column is corresponding to the number of factor levels.
 #' @param nsim a numeric value, the number of Monte Carlo samples for computing an exact Monte Carlo p-value. The default value is 10000.
-#' @param Elapsed.time logical: if \code{TRUE} the progress will be printed in the console.
+#' @param Elapsed_time logical: if \code{TRUE} the progress will be printed in the console.
 #' @param alpha a numeric value, the level of the test. The default value is 0.05.
 #' @param plot logical: if \code{TRUE} an interaction plot will be plotted.
 #' @param vecolor character vector with length two, for visualizing the colors of lines in interaction plot. The default value is blue and red.
@@ -26,11 +26,11 @@
 #'  rows. This test procedure is powerful for detecting interaction when the magnitude of interaction effects is heteroscedastic across the sub-tables of observations.
 #'
 #' @return An object of the class \code{ITtest}, which is a list inducing following components::
-#' \item{pvalue.exact}{The calculated exact Monte Carlo p-value.}
-#' \item{pvalue.appro}{The Bonferroni-adjusted p-value is calculated.}
+#' \item{pvalue_exact}{The calculated exact Monte Carlo p-value.}
+#' \item{pvalue_appro}{The Bonferroni-adjusted p-value is calculated.}
 #' \item{statistic}{The value of the test statistic.}
 #' \item{Nsim}{The number of Monte Carlo samples that are used to estimate p-value.}
-#' \item{data.name}{The name of the input dataset.}
+#' \item{data_name}{The name of the input dataset.}
 #' \item{test}{The name of the test.}
 #' \item{Level}{The level of test.}
 #' \item{Result}{The result of the test at the alpha level with some descriptions on the type of significant interaction.}
@@ -46,10 +46,10 @@
 #'
 #' @examples
 #' data(IDCP)
-#' KKSA.test(IDCP, nsim = 1000, Elapsed.time = FALSE)
+#' KKSA_test(IDCP, nsim = 1000, Elapsed_time = FALSE)
 #'
 #' @export
-KKSA.test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE, plot = FALSE, vecolor = c("blue", "red"), linetype = c(1, 2), Elapsed.time = TRUE) {
+KKSA_test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE, plot = FALSE, vecolor = c("blue", "red"), linetype = c(1, 2), Elapsed_time = TRUE) {
   if (!is.matrix(x)) {
     stop("The input should be a matrix")
   } else {
@@ -58,14 +58,14 @@ KKSA.test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE, plot = FALSE
     tr <- ncol(x)
     n <- tr * bl
     if (bl < 4) {
-      warning("KKSA.test needs at least four levels for the row factor.")
-      str <- Result.KKSA(x, nsim = nsim, alpha = alpha, simu = NULL)$string
+      warning("KKSA_test needs at least four levels for the row factor.")
+      str <- Result_KKSA(x, nsim = nsim, alpha = alpha, simu = NULL)$string
       out <- list(
-        pvalue.exact = NA,
-        pvalue.appro = NA,
+        pvalue_exact = NA,
+        pvalue_appro = NA,
         nsim = nsim,
         statistic = NA,
-        data.name = DNAME,
+        data_name = DNAME,
         test = "KKSA Test",
         Level = alpha,
         Result = str
@@ -74,7 +74,7 @@ KKSA.test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE, plot = FALSE
       cck <- 2^(bl - 1) - 1 - bl
       statistics <- kk_f(x)
       simu <- rep(0, 0)
-      if (Elapsed.time) {
+      if (Elapsed_time) {
         pb <- completed(nsim)
         for (i in 1:nsim) {
           simu[i] <- kk_f(matrix(rnorm(n), nrow = bl))
@@ -85,12 +85,12 @@ KKSA.test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE, plot = FALSE
           simu[i] <- kk_f(matrix(rnorm(n), nrow = bl))
         }
       }
-      KKSA.p <- mean(statistics > simu)
-      KKSA.p.apr <- statistics * cck
-      KKSA.p.apr <- min(1, KKSA.p.apr)
+      KKSA_p <- mean(statistics > simu)
+      KKSA_p_apr <- statistics * cck
+      KKSA_p_apr <- min(1, KKSA_p_apr)
       qKKSA <- quantile(simu, prob = alpha, names = FALSE)
       if (plot) {
-        index <- Result.KKSA(x, nsim = nsim, alpha = alpha, simu = simu)$index
+        index <- Result_KKSA(x, nsim = nsim, alpha = alpha, simu = simu)$index
         color <- 1:bl
         color[index] <- vecolor[1]
         color[-index] <- vecolor[2]
@@ -106,20 +106,20 @@ KKSA.test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE, plot = FALSE
         legend(tr + 0.03, max(x), rep(paste0("row", 1:bl)), lty = ltype, bty = "n", cex = 0.60, col = color, lwd = 2)
       }
       if (report) {
-        if (KKSA.p < alpha) {
-          str <- Result.KKSA(x, nsim = nsim, alpha = alpha, simu = simu)$string
+        if (KKSA_p < alpha) {
+          str <- Result_KKSA(x, nsim = nsim, alpha = alpha, simu = simu)$string
         } else {
-          str <- paste("The KKM.test could not detect any significant interaction.", "The estimated critical value of the KKSA.test with", nsim, "Monte Carlo samples is", round(qKKSA, 4), ".")
+          str <- paste("The KKM_test could not detect any significant interaction.", "The estimated critical value of the KKSA_test with", nsim, "Monte Carlo samples is", round(qKKSA, 4), ".")
         }
       } else {
         str <- paste("A report has not been wanted! To have a report, change argument 'report' to TRUE.")
       }
       out <- list(
-        pvalue.exact = KKSA.p,
-        pvalue.appro = KKSA.p.apr,
+        pvalue_exact = KKSA_p,
+        pvalue_appro = KKSA_p_apr,
         nsim = nsim,
         statistic = statistics,
-        data.name = DNAME,
+        data_name = DNAME,
         test = "KKSA Test",
         Level = alpha,
         Result = str

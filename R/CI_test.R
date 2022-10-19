@@ -18,23 +18,23 @@
 #'
 #' @return An object of the class \code{combtest}, which is a list inducing following components::
 #' \item{nsim}{The number of Monte Carlo samples that are used to estimate p-value.}
-#' \item{Piepho.pvalue}{The p-value of Piepho's (1994) test.}
-#' \item{Piepho.Stat}{The value of Piepho's (1994) test statistic.}
-#' \item{Boik.pvalue}{The p-value of Boik's (1993) test.}
-#' \item{Boik.Stat}{The value of Boik's (1993) test statistic.}
-#' \item{Malik.pvalue}{The p-value of Malik's (2016) et al. test.}
-#' \item{Malik.Stat}{The value of Malik's (2016) et al. test statistic.}
-#' \item{KKM.pvalue}{The p-value of Kharrati-Kopaei and Miller's (2016) test.}
-#' \item{KKM.Stat}{The value of Kharrati-Kopaei and Miller's (2016) test statistic.}
-#' \item{KKSA.pvalue}{The p-value of Kharrati-Kopaei and Sadooghi-Alvandi's (2007) test.}
-#' \item{KKSA.Stat}{The value of Kharrati-Kopaei and Sadooghi-Alvandi's (2007) test statistic.}
-#' \item{Franck.pvalue}{The p-value of Franck's (2013) et al. test.}
-#' \item{Franck.Stat}{The value of Franck's (2013) et al. test statistic.}
+#' \item{Piepho_pvalue}{The p-value of Piepho's (1994) test.}
+#' \item{Piepho_Stat}{The value of Piepho's (1994) test statistic.}
+#' \item{Boik_pvalue}{The p-value of Boik's (1993) test.}
+#' \item{Boik_Stat}{The value of Boik's (1993) test statistic.}
+#' \item{Malik_pvalue}{The p-value of Malik's (2016) et al. test.}
+#' \item{Malik_Stat}{The value of Malik's (2016) et al. test statistic.}
+#' \item{KKM_pvalue}{The p-value of Kharrati-Kopaei and Miller's (2016) test.}
+#' \item{KKM_Stat}{The value of Kharrati-Kopaei and Miller's (2016) test statistic.}
+#' \item{KKSA_pvalue}{The p-value of Kharrati-Kopaei and Sadooghi-Alvandi's (2007) test.}
+#' \item{KKSA_Stat}{The value of Kharrati-Kopaei and Sadooghi-Alvandi's (2007) test statistic.}
+#' \item{Franck_pvalue}{The p-value of Franck's (2013) et al. test.}
+#' \item{Franck_Stat}{The value of Franck's (2013) et al. test statistic.}
 #' \item{Bonferroni}{The combined p-value by using the Bonferroni method.}
 #' \item{Sidak}{The combined p-value by using the Sidak method.}
 #' \item{Jacobi}{The combined p-value by using the Jacobi method.}
 #' \item{GC}{The combined p-value by using the Gaussian copula.}
-#' \item{data.name}{The name of the input dataset.}
+#' \item{data_name}{The name of the input dataset.}
 #' \item{test}{The name of the test.}
 #' \item{Level}{The level of test.}
 #' \item{Result}{The result of the combined test at the alpha level with some descriptions on the type of significant interaction.}
@@ -46,12 +46,12 @@
 #' @examples
 #' \dontrun{
 #' data(CNV)
-#' CPI.test(CNV, nsim = 1000, Elapsed.time = FALSE)
+#' CI_test(CNV, nsim = 1000, Elapsed_time = FALSE)
 #'}
 #' @importFrom stats pchisq pf qnorm var
 #'
 #' @export
-CPI.test <- function(x, nsim = 10000, nc0 = 10000, opvalue = NULL, alpha = 0.05, report = TRUE, Elapsed.time = TRUE) {
+CI_test <- function(x, nsim = 10000, nc0 = 10000, opvalue = NULL, alpha = 0.05, report = TRUE, Elapsed_time = TRUE) {
   if (!is.matrix(x)) {
     stop("The input should be a matrix")
   } else {
@@ -60,10 +60,10 @@ CPI.test <- function(x, nsim = 10000, nc0 = 10000, opvalue = NULL, alpha = 0.05,
     tr <- ncol(x)
     bl <- nrow(x)
     if (bl == 3) {
-      warning("KKSA.test needs at least 4 levels for the row factor. For combining pvalues, the pvalue of the KKSA test is not considered.")
+      warning("KKSA_test needs at least 4 levels for the row factor. For combining pvalues, the pvalue of the KKSA test is not considered.")
     }
     if (bl <= 2) {
-      warning("Franck.test and Piepho.test need at least 3 levels for the row factor. KKSA.test also needs at least 4 levels for the row factor. For combining pvalues, the pvalues of the Franck, Piepho, and KKSA tests are not considered.")
+      warning("Franck_test and Piepho_test need at least 3 levels for the row factor. KKSA_test also needs at least 4 levels for the row factor. For combining pvalues, the pvalues of the Franck, Piepho, and KKSA tests are not considered.")
     }
     n <- tr * bl
     block <- gl(bl, tr)
@@ -91,7 +91,7 @@ CPI.test <- function(x, nsim = 10000, nc0 = 10000, opvalue = NULL, alpha = 0.05,
       Hstat <- kh$fmax
     }
     Bsimu <- Msimu <- psimu <- pisimu <- Hsimu <- rep(0, 0)
-    if (Elapsed.time) {
+    if (Elapsed_time) {
       pb <- completed(nsim)
       for (i in 1:nsim) {
         yy <- rnorm(n)
@@ -132,38 +132,38 @@ CPI.test <- function(x, nsim = 10000, nc0 = 10000, opvalue = NULL, alpha = 0.05,
     }
     Tb <- (1 / Bstat - 1)
     if (p == 1) {
-      Boik.pvalue <- 1
+      Boik_pvalue <- 1
     }
     if (p == 2) {
-      Boik.pvalue <- 1 - pbeta(Tb, 1, (q - 1) / 2)
+      Boik_pvalue <- 1 - pbeta(Tb, 1, (q - 1) / 2)
     }
     if (p > 2) {
-      Boik.pvalue <- mean(Bstat >= Bsimu)
+      Boik_pvalue <- mean(Bstat >= Bsimu)
     }
-    PIC.pvalue <- mean(pstat < psimu)
-    Malik.pvalue <- mean(Mstat < Msimu)
+    PIC_pvalue <- mean(pstat < psimu)
+    Malik_pvalue <- mean(Mstat < Msimu)
     if (bl <= 3) {
-      KKSA.pvalue <- NA
+      KKSA_pvalue <- NA
     } else {
-      KKSA.pvalue <- mean(Kstat > Ksimu)
+      KKSA_pvalue <- mean(Kstat > Ksimu)
     }
     if (bl <= 2) {
-      hiddenf.pvalue <- NA
+      hiddenf_pvalue <- NA
     } else {
-      hiddenf.pvalue <- mean(Hstat < Hsimu)
+      hiddenf_pvalue <- mean(Hstat < Hsimu)
     }
     if (bl <= 2 | is.nan(pistat) | any(is.nan(pisimu))) {
-      piepho.pvalue <- NA
-      warning("Piepho.test is not applicable since this data produce NaN.")
+      piepho_pvalue <- NA
+      warning("Piepho_test is not applicable since this data produce NaN.")
     } else {
-      piepho.pvalue <- mean(pistat < pisimu)
+      piepho_pvalue <- mean(pistat < pisimu)
     }
     
-    pvalues <- c(Boik.pvalue, piepho.pvalue, hiddenf.pvalue, Malik.pvalue, PIC.pvalue, KKSA.pvalue, opvalue)
+    pvalues <- c(Boik_pvalue, piepho_pvalue, hiddenf_pvalue, Malik_pvalue, PIC_pvalue, KKSA_pvalue, opvalue)
     if (is.null(opvalue)) {
-      names(pvalues) <- c("Boik.test", "Piepho.test", "Franck.test", "Malik.test", "KKM.test", "KKSA.test")
+      names(pvalues) <- c("Boik_test", "Piepho_test", "Franck_test", "Malik_test", "KKM_test", "KKSA_test")
     } else {
-      names(pvalues) <- c("Boik.test", "Piepho.test", "Franck.test", "Malik.test", "KKM.test", "KKSA.test", paste0("added test", 1:length(opvalue)))
+      names(pvalues) <- c("Boik_test", "Piepho_test", "Franck_test", "Malik_test", "KKM_test", "KKSA_test", paste0("added test", 1:length(opvalue)))
     }
     if (bl <= 3 | any(is.na(pvalues))) {
       pvalues1 <- pvalues[!is.na(pvalues)]
@@ -183,12 +183,12 @@ CPI.test <- function(x, nsim = 10000, nc0 = 10000, opvalue = NULL, alpha = 0.05,
       if (cp$Bon >= alpha & cp$GC >= alpha & cp$Sidak >= alpha & cp$jacobi >= alpha) {
         str <- paste("No significant interaction was detected at the", paste0(100 * alpha, "%"), "level.", "\n")
       }
-      str1 <- Result.Boik(x, nsim = nsim, alpha = alpha, simu = Bsimu)
-      str2 <- Result.Piepho(x, nsim = nsim, alpha = alpha, simu = pisimu)
-      str3 <- Result.Franck(x, nsim = nsim, alpha = alpha, simu = Hsimu)$string
-      str4 <- Result.Malik(x, simu = Msimu, nsim = nsim, alpha = alpha)
-      str5 <- Result.KKM(x, nsim = nsim, simu = psimu, alpha = alpha, nc0 = nc0)
-      str6 <- Result.KKSA(x, nsim = nsim, alpha = alpha, simu = Ksimu)$string
+      str1 <- Result_Boik(x, nsim = nsim, alpha = alpha, simu = Bsimu)
+      str2 <- Result_Piepho(x, nsim = nsim, alpha = alpha, simu = pisimu)
+      str3 <- Result_Franck(x, nsim = nsim, alpha = alpha, simu = Hsimu)$string
+      str4 <- Result_Malik(x, simu = Msimu, nsim = nsim, alpha = alpha)
+      str5 <- Result_KKM(x, nsim = nsim, simu = psimu, alpha = alpha, nc0 = nc0)
+      str6 <- Result_KKSA(x, nsim = nsim, alpha = alpha, simu = Ksimu)$string
       if (!is.null(opvalue)) {
         str7 <- rep(0, length(opvalue))
         for (j in 1:length(opvalue)) {
@@ -215,39 +215,39 @@ CPI.test <- function(x, nsim = 10000, nc0 = 10000, opvalue = NULL, alpha = 0.05,
       str <- paste("A report has not been wanted! To have a report, change argument 'report' to TRUE.")
     }
     if (bl < 4) {
-      KKSA.pvalue <- NA
+      KKSA_pvalue <- NA
       Kstat <- NA
     }
     if (bl < 3) {
-      hiddenf.pvalue <- NA
+      hiddenf_pvalue <- NA
       Hstat <- NA
-      piepho.pvalue <- NA
+      piepho_pvalue <- NA
       pistat <- NA
     }
     if (bl <= 2 | is.nan(pistat) | any(is.nan(pisimu))) {
-      piepho.pvalue <- NA
+      piepho_pvalue <- NA
       pistat <- NA
     }
       
     out <- list(
       nsim = nsim,
-      Piepho.pvalue = piepho.pvalue,
-      Piepho.Stat = pistat,
-      Boik.pvalue = Boik.pvalue,
-      Boik.Stat = Bstat,
-      Malik.pvalue = Malik.pvalue,
-      Malik.Stat = Mstat,
-      KKM.pvalue = PIC.pvalue,
-      KKM.Stat = pstat,
-      KKSA.pvalue = KKSA.pvalue,
-      KKSA.Stat = Kstat,
-      Franck.pvalue = hiddenf.pvalue,
-      Franck.Stat = Hstat,
+      Piepho_pvalue = piepho_pvalue,
+      Piepho_Stat = pistat,
+      Boik_pvalue = Boik_pvalue,
+      Boik_Stat = Bstat,
+      Malik_pvalue = Malik_pvalue,
+      Malik_Stat = Mstat,
+      KKM_pvalue = PIC_pvalue,
+      KKM_Stat = pstat,
+      KKSA_pvalue = KKSA_pvalue,
+      KKSA_Stat = Kstat,
+      Franck_pvalue = hiddenf_pvalue,
+      Franck_Stat = Hstat,
       Bonferroni = Bonferroni,
       Sidak = Sidak,
       Jacobi = jacobi,
       GC = GC,
-      data.name = DNAME,
+      data_name = DNAME,
       test = "Combined p-value interaction Test",
       Level = alpha,
       Result = str

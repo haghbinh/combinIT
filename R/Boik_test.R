@@ -9,11 +9,11 @@
 #' @param report logical: if \code{TRUE} the result of the test is reported at the \code{alpha} level.
 #'
 #' @return An object of the class \code{ITtest}, which is a list inducing following components::
-#' \item{pvalue.exact}{An exact Monte Carlo p-value when \eqn{p>2}. For \eqn{p=2} an exact p-value is calculated.}
-#' \item{pvalue.appro}{An chi-squared asymptotic p-value.}
+#' \item{pvalue_exact}{An exact Monte Carlo p-value when \eqn{p>2}. For \eqn{p=2} an exact p-value is calculated.}
+#' \item{pvalue_appro}{An chi-squared asymptotic p-value.}
 #' \item{statistic}{The value of test statistic.}
 #' \item{Nsim}{The number of Monte Carlo samples that are used to estimate p-value.}
-#' \item{data.name}{The name of the input dataset.}
+#' \item{data_name}{The name of the input dataset.}
 #' \item{test}{The name of the test.}
 #' \item{Level}{The level of test.}
 #' \item{Result}{The result of the test at the alpha level with some descriptions on the type of significant interaction.}
@@ -36,10 +36,10 @@
 #'
 #' @examples
 #' data(MVGH)
-#' Boik.test(MVGH, nsim = 1000)
+#' Boik_test(MVGH, nsim = 1000)
 #' @importFrom stats median pbeta rnorm qbeta
 #' @export
-Boik.test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE) {
+Boik_test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE) {
   if (!is.matrix(x)) {
     stop("The input should be a matrix")
   } else {
@@ -54,45 +54,45 @@ Boik.test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE) {
     T0 <- p * q * Tb / 2
     df <- (p + 2) * (p - 1) / 2
     if (p == 1) {
-      asyboik.p <- 1
+      asyboik_p <- 1
       simu <- Bfsim(nsim, bl, tr, p)
-      boik.p <- mean(statistics >= simu)
+      boik_p <- mean(statistics >= simu)
     }
     if (p > 2) {
       simu <- Bfsim(nsim, bl, tr, p)
-      boik.p <- mean(statistics >= simu)
-      asyboik.p <- 1 - pchisq(T0, df)
+      boik_p <- mean(statistics >= simu)
+      asyboik_p <- 1 - pchisq(T0, df)
       qBoik <- quantile(simu, prob = alpha, names = FALSE)
     }
     if (p == 2) {
-      boik.p <- 1 - pbeta(Tb, 1, (q - 1) / 2)
-      asyboik.p <- 1 - pchisq(T0, df)
+      boik_p <- 1 - pbeta(Tb, 1, (q - 1) / 2)
+      asyboik_p <- 1 - pchisq(T0, df)
       qBoik <- qbeta(1 - alpha, 1, (q - 1) / 2)
       qBoik <- 1 / (qBoik + 1)
     }
     if (report) {
-      if (boik.p < alpha) {
-        str <- Result.Boik(x, nsim = nsim, alpha = alpha, simu = simu)
+      if (boik_p < alpha) {
+        str <- Result_Boik(x, nsim = nsim, alpha = alpha, simu = simu)
       } else {
         if (p == 2) {
-          str <- paste("The Boik.test could not detect any significant interaction.", "The exact critical value of the Boik.test is", round(qBoik, 4), ".")
+          str <- paste("The Boik_test could not detect any significant interaction.", "The exact critical value of the Boik_test is", round(qBoik, 4), ".")
         }
         if (p > 2) {
-          str <- paste("The Boik.test could not detect any significant interaction.", "The estimated critical value of the Boik.test with", nsim, "Monte Carlo samples is", round(qBoik, 4), ".")
+          str <- paste("The Boik_test could not detect any significant interaction.", "The estimated critical value of the Boik_test with", nsim, "Monte Carlo samples is", round(qBoik, 4), ".")
         }
         if (p == 1) {
-          str <- paste("The Boik.test could not detect any significant interaction.", "The exact critical value of the Boik.test is", 1, ".")
+          str <- paste("The Boik_test could not detect any significant interaction.", "The exact critical value of the Boik_test is", 1, ".")
         }
       }
     } else {
       str <- paste("A report has not been wanted! To have a report, change argument 'report' to TRUE.")
     }
     out <- list(
-      pvalue.exact = boik.p,
-      pvalue.appro = asyboik.p,
+      pvalue_exact = boik_p,
+      pvalue_appro = asyboik_p,
       nsim = nsim,
       statistic = statistics,
-      data.name = DNAME,
+      data_name = DNAME,
       test = "Boik Test",
       Level = alpha,
       Result = str

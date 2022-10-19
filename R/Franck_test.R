@@ -4,7 +4,7 @@
 #'
 #' @param x numeric matrix, \eqn{a \times b} data matrix where the number of row and column is corresponding to the number of factor levels.
 #' @param nsim a numeric value, the number of Monte Carlo samples for computing an exact Monte Carlo p-value. The default value is 10000.
-#' @param Elapsed.time logical: if \code{TRUE} the progress will be printed in the console.
+#' @param Elapsed_time logical: if \code{TRUE} the progress will be printed in the console.
 #' @param alpha a numeric value, the level of the test. The default value is 0.05.
 #' @param plot logical: if \code{TRUE} an interaction plot will be plotted.
 #' @param vecolor character vector of length two, for visualizing the colors of lines in interaction plot. The default value is blue and red.
@@ -25,11 +25,11 @@
 #'
 #'
 #' @return An object of the class \code{ITtest}, which is a list inducing following components::
-#' \item{pvalue.exact}{The calculated exact Monte Carlo p-value.}
-#' \item{pvalue.appro}{The Bonferroni-adjusted p-value is calculated.}
+#' \item{pvalue_exact}{The calculated exact Monte Carlo p-value.}
+#' \item{pvalue_appro}{The Bonferroni-adjusted p-value is calculated.}
 #' \item{statistic}{The value of the test statistic.}
 #' \item{Nsim}{The number of Monte Carlo samples that are used to estimate p-value.}
-#' \item{data.name}{The name of the input dataset.}
+#' \item{data_name}{The name of the input dataset.}
 #' \item{test}{The name of the test.}
 #' \item{Level}{The level of test.}
 #' \item{Result}{The result of the test at the alpha level with some descriptions on the type of significant interaction.}
@@ -51,7 +51,7 @@
 #'
 #' @importFrom stats pchisq pf qnorm var
 #' @export
-Franck.test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE, plot = FALSE, vecolor = c("blue", "red"), linetype = c(1, 2), Elapsed.time = TRUE) {
+Franck_test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE, plot = FALSE, vecolor = c("blue", "red"), linetype = c(1, 2), Elapsed_time = TRUE) {
   DNAME <- deparse1(substitute(x))
   if (!is.matrix(x)) {
     stop("The input should be a matrix")
@@ -60,14 +60,14 @@ Franck.test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE, plot = FAL
     tr <- ncol(x)
     n <- tr * bl
     if (bl < 3) {
-      warning("Frank.test needs at least three levels for the row factor.")
-      str <- Result.Franck(x, nsim = nsim, alpha = alpha, simu = NULL)$string
+      warning("Frank_test needs at least three levels for the row factor.")
+      str <- Result_Franck(x, nsim = nsim, alpha = alpha, simu = NULL)$string
       out <- list(
-        pvalue.exact = NA,
-        pvalue.appro = NA,
+        pvalue_exact = NA,
+        pvalue_appro = NA,
         nsim = nsim,
         statistic = NA,
-        data.name = DNAME,
+        data_name = DNAME,
         test = "Franck Test",
         Level = alpha,
         Result = str
@@ -76,7 +76,7 @@ Franck.test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE, plot = FAL
       cch <- 2^(bl - 1) - 1
       statistics <- hh_f(x)
       simu <- rep(0, 0)
-      if (Elapsed.time) {
+      if (Elapsed_time) {
         pb <- completed(nsim)
         for (i in 1:nsim) {
           simu[i] <- hh_f(matrix(rnorm(n), nrow = bl, ncol = tr))
@@ -89,10 +89,10 @@ Franck.test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE, plot = FAL
       }
       hidden <- mean(statistics < simu)
       adjpvalue <- (1 - pf(statistics, (tr - 1), (tr - 1) * (bl - 2))) * cch
-      hidden.apr <- min(1, adjpvalue)
+      hidden_apr <- min(1, adjpvalue)
       qFranck <- quantile(simu, prob = 1 - alpha, names = FALSE)
       if (plot) {
-        index <- Result.Franck(x, nsim = nsim, alpha = alpha, simu = simu)$index
+        index <- Result_Franck(x, nsim = nsim, alpha = alpha, simu = simu)$index
         color <- 1:bl
         color[index] <- vecolor[1]
         color[-index] <- vecolor[2]
@@ -109,19 +109,19 @@ Franck.test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE, plot = FAL
       }
       if (report) {
         if (hidden < alpha) {
-          str <- Result.Franck(x, nsim = nsim, alpha = alpha, simu = simu)$string
+          str <- Result_Franck(x, nsim = nsim, alpha = alpha, simu = simu)$string
         } else {
-          str <- paste("The Franck.test could not detect any significant interaction.", "The estimated critical value of the Franck.test with", nsim, "Monte Carlo samples is", round(qFranck, 4), ".")
+          str <- paste("The Franck_test could not detect any significant interaction.", "The estimated critical value of the Franck_test with", nsim, "Monte Carlo samples is", round(qFranck, 4), ".")
         }
       } else {
         str <- paste("A report has not been wanted! To have a report, change argument 'report' to TRUE.")
       }
       out <- list(
-        pvalue.exact = hidden,
-        pvalue.appro = hidden.apr,
+        pvalue_exact = hidden,
+        pvalue_appro = hidden_apr,
         nsim = nsim,
         statistic = statistics,
-        data.name = DNAME,
+        data_name = DNAME,
         test = "Franck Test",
         Level = alpha,
         Result = str

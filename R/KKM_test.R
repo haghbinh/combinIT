@@ -10,11 +10,11 @@
 #' @param report logical: if \code{TRUE} the result of the test is reported at the \code{alpha} level.
 #'
 #' @return An object of the class \code{ITtest}, which is a list inducing following components::
-#' \item{pvalue.exact}{The calculated exact Monte Carlo p-value.}
-#' \item{pvalue.appro}{is not available for \code{KKM.test}.}
+#' \item{pvalue_exact}{The calculated exact Monte Carlo p-value.}
+#' \item{pvalue_appro}{is not available for \code{KKM_test}.}
 #' \item{Nsim}{The number of Monte Carlo samples that are used to estimate p-value.}
 #' \item{statistic}{The value of the test statistic.}
-#' \item{data.name}{The name of the input dataset.}
+#' \item{data_name}{The name of the input dataset.}
 #' \item{test}{The name of the test.}
 #' \item{Level}{The level of test.}
 #' \item{Result}{The result of the test at the alpha level with some descriptions on the type of significant interaction.}
@@ -36,10 +36,10 @@
 
 #' @examples
 #' data(RDWW)
-#' KKM.test(RDWW, nsim = 1000, nc0 = 1000)
+#' KKM_test(RDWW, nsim = 1000, nc0 = 1000)
 #'
 #' @export
-KKM.test <- function(x, nsim = 1000, alpha = 0.05, report = TRUE, nc0 = 10000) {
+KKM_test <- function(x, nsim = 1000, alpha = 0.05, report = TRUE, nc0 = 10000) {
   if (!is.matrix(x)) {
     stop("The input should be a matrix")
   } else {
@@ -56,9 +56,9 @@ KKM.test <- function(x, nsim = 1000, alpha = 0.05, report = TRUE, nc0 = 10000) {
     qKKM <- quantile(simu, prob = 1 - alpha, names = FALSE)
     if (report) {
       if (PIC < alpha) {
-        str <- Result.KKM(x, simu = simu, nsim = nsim, alpha = alpha, nc0 = nc0)
+        str <- Result_KKM(x, simu = simu, nsim = nsim, alpha = alpha, nc0 = nc0)
       } else {
-        str <- paste("The KKM.test could not detect any significant interaction.", "The estimated critical value of the KKM.test with", nsim, "Monte Carlo samples is", round(qKKM, 4), ".")
+        str <- paste("The KKM_test could not detect any significant interaction.", "The estimated critical value of the KKM_test with", nsim, "Monte Carlo samples is", round(qKKM, 4), ".")
       }
     } else {
       str <- paste("A report has not been wanted! To have a report, change argument 'report' to TRUE.")
@@ -66,11 +66,11 @@ KKM.test <- function(x, nsim = 1000, alpha = 0.05, report = TRUE, nc0 = 10000) {
   }
   structure(
     list(
-      pvalue.exact = PIC,
-      pvalue.appro = "NULL",
+      pvalue_exact = PIC,
+      pvalue_appro = "NULL",
       nsim = nsim,
       statistic = statistics,
-      data.name = DNAME,
+      data_name = DNAME,
       test = "KKM Test",
       Level = alpha,
       Result = str
