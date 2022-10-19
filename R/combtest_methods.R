@@ -7,7 +7,7 @@ print.combtest <- function(x, ...) {
   msg5 <- paste("Malik Test: Statistics = ", round(x$Malik_Stat, 5),", Pvalue = ", round(x$Malik_pvalue, 5),"\n")
   msg6 <- paste("KKM Test: Statistics = ", round(x$KKM_Stat, 5),", Pvalue = ", round(x$KKM_pvalue, 5),"\n")
   msg7 <- paste("KKSA Test: Statistics = ", round(x$KKSA_Stat, 5),", Pvalue = ", round(x$KKSA_pvalue, 5),"\n")
-  msg8 <- paste("Malik Test: Statistics = ", round(x$Franck_Stat, 5),", Pvalue = ", round(x$Franck_pvalue, 5),"\n")
+  msg8 <- paste("Franck Test: Statistics = ", round(x$Franck_Stat, 5),", Pvalue = ", round(x$Franck_pvalue, 5),"\n")
   msg9 <- paste("Bonferroni method: Pvalue =", round(x$Bonferroni, 5),"\n")
   msg10 <- paste("Sidak method: Pvalue =", round(x$Sidak, 5),"\n")
   msg11 <- paste("Jacobi method: Pvalue =", round(x$Jacobi, 5),"\n")
