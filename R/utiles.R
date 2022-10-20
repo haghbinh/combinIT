@@ -34,7 +34,7 @@ justify <- function(string, width = 70, fill = "right") {
   paste0(unlist(formatted_text, recursive = FALSE), collapse = "\n")
 }
 
-
+#' @importFrom utils head tail
 fill_spaces <- function(lines, width, fill) {
   tokens <- strsplit(lines, "\\s+")
   res <- lapply(head(tokens, -1L), function(x) {

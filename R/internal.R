@@ -1,7 +1,4 @@
-#' This is an internal function which compute Kronecker product for PIC method
-#'
-#' @keywords internal
-
+## This is an internal function which compute Kronecker product for PIC method
 kpr <- function(bl, tr) {
   wa <- combn(bl, 2)
   wb <- combn(tr, 2)
@@ -19,14 +16,7 @@ kpr <- function(bl, tr) {
   return(c)
 }
 
-
-#' internal function forcombining pvalues
-
-#'
-#' @keywords internal
-#'
 #' @importFrom mvtnorm pmvnorm
-
 comb <- function(pvalues) {
   P <- pvalues
   P[P == 0] <- 10^(-6)
@@ -48,8 +38,6 @@ comb <- function(pvalues) {
   Sidak <- 1 - (1 - minp)^k # minpv~Betha(1,k)
   list(Bon = Bon, Sidak = Sidak, jacobi = jacobi, GC = GC) # GC=Goussian Copula=MVNormal
 }
-
-
 
 #' @importFrom utils combn
 Result_KKSA <- function(x, nsim, alpha, simu) {
