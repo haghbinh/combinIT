@@ -5,8 +5,8 @@
 New submission
 
 ## Test environments
-* local Windows 10 install, R 4.2.0
+* local Windows 11 install, R 4.2.1
 * winbuilder
-* ubuntu 22.04.0 LTS (on travis-ci), R 4.2.0
+* ubuntu 22.04.0 LTS (on travis-ci), R 4.2.1
 * rhub check_for_cran
 
