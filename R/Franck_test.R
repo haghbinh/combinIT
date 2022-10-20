@@ -7,8 +7,8 @@
 #' @param Elapsed_time logical: if \code{TRUE} the progress will be printed in the console.
 #' @param alpha a numeric value, the level of the test. The default value is 0.05.
 #' @param plot logical: if \code{TRUE} an interaction plot will be plotted.
-#' @param vecolor character vector of length two, for visualizing the colors of lines in interaction plot. The default value is blue and red.
-#' @param linetype numeric vector of length two, for visualizing the line types in interaction plot. The default value is one and two.
+#' @param vecolor character vector of length two, for visualizing the colors of lines in interaction plot. The default colors are blue and red.
+#' @param linetype numeric vector of length two, for visualizing the line types in interaction plot. The default line types are 1 and 2.
 #' @param report logical: if \code{TRUE} the result of the test is reported at the \code{alpha} level.
 #'
 #' @details Franck et al. (2013) derived a test statistic based on the “hidden additivity” structure.
@@ -24,7 +24,7 @@
 #'  Note that the number of rows should be greater than two to perform the Franck.test. This test is powerful when there is a hidden additivity structure in the data set.
 #'
 #'
-#' @return An object of the class \code{ITtest}, which is a list inducing following components::
+#' @return An object of the class \code{ITtest}, which is a list inducing following components:
 #' \item{pvalue_exact}{The calculated exact Monte Carlo p-value.}
 #' \item{pvalue_appro}{The Bonferroni-adjusted p-value is calculated.}
 #' \item{statistic}{The value of the test statistic.}
@@ -47,7 +47,7 @@
 #'
 #' @examples
 #' data(CNV)
-#' Franck_test(CNV, nsim = 1000, Elapsed.time = FALSE)
+#' Franck_test(CNV, nsim = 1000, Elapsed_time = FALSE)
 #'
 #' @importFrom stats pchisq pf qnorm var
 #' @export
@@ -111,7 +111,7 @@ Franck_test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE, plot = FAL
         if (hidden < alpha) {
           str <- Result_Franck(x, nsim = nsim, alpha = alpha, simu = simu)$string
         } else {
-          str <- paste("The Franck_test could not detect any significant interaction.", "The estimated critical value of the Franck_test with", nsim, "Monte Carlo samples is", round(qFranck, 4), ".")
+          str <- paste0("The Franck_test could not detect any significant interaction at the ", paste0(100 * (alpha), "%"), " level.", " The estimated critical value of the Franck_test at the ", paste0(100 * (alpha), "%"), " level with ", nsim, " Monte Carlo samples is ", round(qFranck, 4), ".")
         }
       } else {
         str <- paste("A report has not been wanted! To have a report, change argument 'report' to TRUE.")

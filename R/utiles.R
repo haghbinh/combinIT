@@ -20,7 +20,7 @@ nextc.completed <- function(x, i) {
 }
 
 
-#  justify text in reports_____________________________________
+#  justify text in reports-------------------------------
 justify <- function(string, width = 70, fill = "right") {
   paragraphs <- gsub(
     "^\\s+|\\s+$", "",

@@ -16,8 +16,8 @@ Boik_test(x, nsim = 10000, alpha = 0.05, report = TRUE)
 \item{report}{logical: if \code{TRUE} the result of the test is reported at the \code{alpha} level.}
 }
 \value{
-An object of the class \code{ITtest}, which is a list inducing following components::
-\item{pvalue_exact}{An exact Monte Carlo p-value when \eqn{p>2}. For \eqn{p=2} an exact p-value is calculated.}
+An object of the class \code{ITtest}, which is a list inducing following components:
+\item{pvalue_exact}{An exact Monte Carlo p-value when \eqn{p>2}. For \eqn{p=2}, an exact p-value is calculated.}
 \item{pvalue_appro}{An chi-squared asymptotic p-value.}
 \item{statistic}{The value of test statistic.}
 \item{Nsim}{The number of Monte Carlo samples that are used to estimate p-value.}

@@ -7,8 +7,8 @@
 #' @param Elapsed_time logical: if \code{TRUE} the progress will be printed in the console.
 #' @param alpha a numeric value, the level of the test. The default value is 0.05.
 #' @param plot logical: if \code{TRUE} an interaction plot will be plotted.
-#' @param vecolor character vector with length two, for visualizing the colors of lines in interaction plot. The default value is blue and red.
-#' @param linetype numeric vector with length two, for visualizing the line types in interaction plot. The default value is one and two.
+#' @param vecolor character vector with length two, for visualizing the colors of lines in interaction plot. The default colors are blue and red.
+#' @param linetype numeric vector with length two, for visualizing the line types in interaction plot. The default line types are 1 and 2.
 #' @param report logical: if \code{TRUE} the result of the test is reported at the \code{alpha} level.
 #'
 #' @details  Suppose that \eqn{a \ge b} and \eqn{b \ge 4}. Consider the \eqn{l}-th division of the data table into two sub-tables,
@@ -25,7 +25,7 @@
 #'  Note that this method of testing requires that the data matrix has more than three
 #'  rows. This test procedure is powerful for detecting interaction when the magnitude of interaction effects is heteroscedastic across the sub-tables of observations.
 #'
-#' @return An object of the class \code{ITtest}, which is a list inducing following components::
+#' @return An object of the class \code{ITtest}, which is a list inducing following components:
 #' \item{pvalue_exact}{The calculated exact Monte Carlo p-value.}
 #' \item{pvalue_appro}{The Bonferroni-adjusted p-value is calculated.}
 #' \item{statistic}{The value of the test statistic.}
@@ -109,10 +109,10 @@ KKSA_test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE, plot = FALSE
         if (KKSA_p < alpha) {
           str <- Result_KKSA(x, nsim = nsim, alpha = alpha, simu = simu)$string
         } else {
-          str <- paste("The KKM_test could not detect any significant interaction.", "The estimated critical value of the KKSA_test with", nsim, "Monte Carlo samples is", round(qKKSA, 4), ".")
+          str <- paste0("The KKSA_test could not detect any significant interaction at the ", paste0(100 * (alpha), "%"), " level.", " The estimated critical value of the KKSA_test at the ", paste0(100 * (alpha), "%"), " level with ", nsim, " Monte Carlo samples is ", round(qKKSA, 4), ".")
         }
       } else {
-        str <- paste("A report has not been wanted! To have a report, change argument 'report' to TRUE.")
+        str <- paste0("A report has not been wanted! To have a report, change argument 'report' to TRUE.")
       }
       out <- list(
         pvalue_exact = KKSA_p,

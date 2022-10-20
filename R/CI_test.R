@@ -1,4 +1,4 @@
-#' Combined P-value Interaction Test
+#' Combined Interaction Test
 #'
 #' This function reports the p-values of the tests for non-additivity developed by Boik (1993), Piepho (1994),
 #' Kharrati-Kopaei and Sadooghi-Alvandi (2007), Franck et al. (2013), Malik et al. (2016)
@@ -12,11 +12,11 @@
 #' @param opvalue a numeric vector, other p-values (in addition to the six considered p-values) that are going to be combined.
 #' @param alpha a numeric value, the level of the test. The default value is 0.05.
 #' @param report logical: if \code{TRUE} the result of the test is reported at the \code{alpha} level.
-#' @param Elapsed.time logical: if \code{TRUE} the progress will be printed in the console.
+#' @param Elapsed_time logical: if \code{TRUE} the progress will be printed in the console.
 #'
-#' @details The data matrix is divided based on the row of the data matrix for \code{KKSA.test} and \code{Franck.test}. Note that \code{KKSA.test} is not applicable when \eqn{a} is less than four. \code{Franck.test} and \code{Piepho.test} are not applicable when \eqn{a} is less than three. This function needs \code{mvtnorm} package.
+#' @details The data matrix is divided based on the row of the data matrix for \code{KKSA_test} and \code{Franck_test}. Note that \code{KKSA_test} is not applicable when \eqn{a} is less than four. \code{Franck_test} and \code{Piepho_test} are not applicable when \eqn{a} is less than three. This function needs \code{mvtnorm} package.
 #'
-#' @return An object of the class \code{combtest}, which is a list inducing following components::
+#' @return An object of the class \code{combtest}, which is a list inducing following components:
 #' \item{nsim}{The number of Monte Carlo samples that are used to estimate p-value.}
 #' \item{Piepho_pvalue}{The p-value of Piepho's (1994) test.}
 #' \item{Piepho_Stat}{The value of Piepho's (1994) test statistic.}
@@ -44,10 +44,9 @@
 #'  86(3): 469-487.
 #'
 #' @examples
-#' \dontrun{
 #' data(CNV)
 #' CI_test(CNV, nsim = 1000, Elapsed_time = FALSE)
-#'}
+#' 
 #' @importFrom stats pchisq pf qnorm var
 #'
 #' @export
@@ -181,7 +180,7 @@ CI_test <- function(x, nsim = 10000, nc0 = 10000, opvalue = NULL, alpha = 0.05, 
     jacobi <- cp$jacobi
     if (report) {
       if (cp$Bon >= alpha & cp$GC >= alpha & cp$Sidak >= alpha & cp$jacobi >= alpha) {
-        str <- paste("No significant interaction was detected at the", paste0(100 * alpha, "%"), "level.", "\n")
+        str <- paste0("No significant interaction was detected at the ", paste0(100 * alpha, "%"), " level.", "\n")
       }
       str1 <- Result_Boik(x, nsim = nsim, alpha = alpha, simu = Bsimu)
       str2 <- Result_Piepho(x, nsim = nsim, alpha = alpha, simu = pisimu)
@@ -192,7 +191,7 @@ CI_test <- function(x, nsim = 10000, nc0 = 10000, opvalue = NULL, alpha = 0.05, 
       if (!is.null(opvalue)) {
         str7 <- rep(0, length(opvalue))
         for (j in 1:length(opvalue)) {
-          str7[j] <- paste("Significant interactions may be due to the", paste0("added test", j), "that its p-value is recently added.")
+          str7[j] <- paste0("Significant interactions may be due to the ", paste0("added test", j), " that its p-value is recently added.")
         }
         allstr <- c(str1, str2, str3, str4, str5, str6, str7)
       } else {
@@ -206,7 +205,7 @@ CI_test <- function(x, nsim = 10000, nc0 = 10000, opvalue = NULL, alpha = 0.05, 
       if (cp$Bon < alpha) {
         for (i in 2:length(spvalues)) {
           if (spvalues[i] < alpha / (length(spvalues) - i + 1)) {
-            str <- paste(str, "\n", "\n", paste0("Part ", i, " of the report:"), "In addition to the", paste0(names(spvalues[i - 1]), ", the"), names(spvalues[i]), "is significant", "by using the Holm-Bonferroni method.")
+            str <- paste0(str, "\n", "\n", paste0("Part ", i, " of the report:"), " In addition to the ", paste0(names(spvalues[i - 1]), ", the "), names(spvalues[i]), " is significant ", " by using the Holm-Bonferroni method.")
             str <- paste(str, sstr[i])
           }
         }
@@ -248,7 +247,7 @@ CI_test <- function(x, nsim = 10000, nc0 = 10000, opvalue = NULL, alpha = 0.05, 
       Jacobi = jacobi,
       GC = GC,
       data_name = DNAME,
-      test = "Combined p-value interaction Test",
+      test = "Combined interaction Test",
       Level = alpha,
       Result = str
     )

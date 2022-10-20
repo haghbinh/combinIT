@@ -18,7 +18,7 @@ KKM_test(x, nsim = 1000, alpha = 0.05, report = TRUE, nc0 = 10000)
 \item{nc0}{a numeric value, the number of Monte Carlo samples for computing the unbiasing constant \eqn{c_0}. The default value is 10000.}
 }
 \value{
-An object of the class \code{ITtest}, which is a list inducing following components::
+An object of the class \code{ITtest}, which is a list inducing following components:
 \item{pvalue_exact}{The calculated exact Monte Carlo p-value.}
 \item{pvalue_appro}{is not available for \code{KKM_test}.}
 \item{Nsim}{The number of Monte Carlo samples that are used to estimate p-value.}
@@ -30,10 +30,10 @@ An object of the class \code{ITtest}, which is a list inducing following compone
 }
 \description{
 This function calculates the test statistic for testing \eqn{H_0:} There is no interaction, and corresponding Monte Carlo p-value
-proposed by Kharrati-Kopaei and Miller(2016).
+proposed by Kharrati-Kopaei and Miller (2016).
 }
 \details{
-Kharrati-Kopaei and Miller(2016) proposed a test statistic for testing interaction
+Kharrati-Kopaei and Miller (2016) proposed a test statistic for testing interaction
 based on inspecting all pairwise interaction contrasts (PIC).
 This test depends on an unbiasing constant \eqn{c_0} that is calculated by a Monte Carlo simulation.
 In addition, the null distribution of the test statistic is calculated by a Monte Carlo simulation. This test is not applicable when both \eqn{a} and \eqn{b} are less than three.

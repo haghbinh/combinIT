@@ -12,7 +12,7 @@ interaction_plot(x, ...)
 \item{...}{plot parameters}
 }
 \value{
-An interaction plot for input
+Plots an interaction plot for input.
 }
 \description{
 Interaction Plot

@@ -2,7 +2,7 @@
 #'
 #' @param x numeric matrix, \eqn{a \times b} data matrix where the number of row and column is corresponding to the number of factor levels.
 #' @param ... plot parameters
-#' @return  An interaction plot for input
+#' @return  Plots an interaction plot for input.
 #' @author Shenavari, Z.; Haghbin, H.; Kharrati-Kopaei, M.; Najibi, S.M.
 #' @examples \dontrun{this is an example}
 #' data(CNV)

@@ -1,7 +1,7 @@
 #' Kharrati-Kopaei and Miller's (2016) Test for Interaction
 #'
 #' This function calculates the test statistic for testing \eqn{H_0:} There is no interaction, and corresponding Monte Carlo p-value
-#' proposed by Kharrati-Kopaei and Miller(2016).
+#' proposed by Kharrati-Kopaei and Miller (2016).
 #'
 #' @param x a numeric matrix, \eqn{a \times b} data matrix where the number of row and column is corresponding to the number of factor levels.
 #' @param nsim a numeric value, the number of Monte Carlo samples for computing an exact Monte Carlo p-value. The default value is 10000.
@@ -9,7 +9,7 @@
 #' @param alpha a numeric value, the level of the test. The default value is 0.05.
 #' @param report logical: if \code{TRUE} the result of the test is reported at the \code{alpha} level.
 #'
-#' @return An object of the class \code{ITtest}, which is a list inducing following components::
+#' @return An object of the class \code{ITtest}, which is a list inducing following components:
 #' \item{pvalue_exact}{The calculated exact Monte Carlo p-value.}
 #' \item{pvalue_appro}{is not available for \code{KKM_test}.}
 #' \item{Nsim}{The number of Monte Carlo samples that are used to estimate p-value.}
@@ -20,7 +20,7 @@
 #' \item{Result}{The result of the test at the alpha level with some descriptions on the type of significant interaction.}
 #'
 #' @details
-#' Kharrati-Kopaei and Miller(2016) proposed a test statistic for testing interaction
+#' Kharrati-Kopaei and Miller (2016) proposed a test statistic for testing interaction
 #' based on inspecting all pairwise interaction contrasts (PIC).
 #' This test depends on an unbiasing constant \eqn{c_0} that is calculated by a Monte Carlo simulation.
 #' In addition, the null distribution of the test statistic is calculated by a Monte Carlo simulation. This test is not applicable when both \eqn{a} and \eqn{b} are less than three.
@@ -58,7 +58,7 @@ KKM_test <- function(x, nsim = 1000, alpha = 0.05, report = TRUE, nc0 = 10000) {
       if (PIC < alpha) {
         str <- Result_KKM(x, simu = simu, nsim = nsim, alpha = alpha, nc0 = nc0)
       } else {
-        str <- paste("The KKM_test could not detect any significant interaction.", "The estimated critical value of the KKM_test with", nsim, "Monte Carlo samples is", round(qKKM, 4), ".")
+        str <- paste0("The KKM_test could not detect any significant interaction at the ", paste0(100 * (alpha), "%"), " level.", " The estimated critical value of the KKM_test at the ", paste0(100 * (alpha), "%"), " level with ", nsim, " Monte Carlo samples is ", round(qKKM, 4), ".")
       }
     } else {
       str <- paste("A report has not been wanted! To have a report, change argument 'report' to TRUE.")

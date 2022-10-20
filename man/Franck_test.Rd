@@ -26,14 +26,14 @@ Franck_test(
 
 \item{plot}{logical: if \code{TRUE} an interaction plot will be plotted.}
 
-\item{vecolor}{character vector of length two, for visualizing the colors of lines in interaction plot. The default value is blue and red.}
+\item{vecolor}{character vector of length two, for visualizing the colors of lines in interaction plot. The default colors are blue and red.}
 
-\item{linetype}{numeric vector of length two, for visualizing the line types in interaction plot. The default value is one and two.}
+\item{linetype}{numeric vector of length two, for visualizing the line types in interaction plot. The default line types are 1 and 2.}
 
 \item{Elapsed_time}{logical: if \code{TRUE} the progress will be printed in the console.}
 }
 \value{
-An object of the class \code{ITtest}, which is a list inducing following components::
+An object of the class \code{ITtest}, which is a list inducing following components:
 \item{pvalue_exact}{The calculated exact Monte Carlo p-value.}
 \item{pvalue_appro}{The Bonferroni-adjusted p-value is calculated.}
 \item{statistic}{The value of the test statistic.}
@@ -61,7 +61,7 @@ Franck et al. (2013) derived a test statistic based on the â€œhidden additivityâ
 }
 \examples{
 data(CNV)
-Franck_test(CNV, nsim = 1000, Elapsed.time = FALSE)
+Franck_test(CNV, nsim = 1000, Elapsed_time = FALSE)
 
 }
 \references{

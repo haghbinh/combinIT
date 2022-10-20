@@ -40,10 +40,9 @@ Malik (2016) et al. proposed to partition
  Further, the distribution of the Malik's et al. test statistic is not known under additivity and the corresponding p-value is calculated by a Monte Carlo simulation.
 }
 \examples{
-\dontrun{
 data(IDCP)
 Malik_test(IDCP, nsim = 1000, Elapsed_time = FALSE)
-}
+
 }
 \references{
 Malik, W.A., Mohring, J., Piepho, H.P. (2016). A

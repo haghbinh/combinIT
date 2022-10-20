@@ -35,10 +35,9 @@
 #' 86(3): 469-487.
 #'
 #' @examples
-#' \dontrun{
 #' data(IDCP)
 #' Malik_test(IDCP, nsim = 1000, Elapsed_time = FALSE)
-#'}
+#'
 #' @export
 Malik_test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE, Elapsed_time = TRUE) {
   if (!is.matrix(x)) {
@@ -74,7 +73,7 @@ Malik_test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE, Elapsed_tim
       if (malik < alpha) {
         str <- Result_Malik(x, simu = simu, alpha = alpha, nsim = nsim)
       } else {
-        str <- paste("The Malik_test could not detect any significant interaction.", "The estimated critical value of the Malik_test with", nsim, "Monte Carlo samples is", round(qMalik, 4), ".")
+        str <- paste0("The Malik_test could not detect any significant interaction at the ", paste0(100 * (alpha), "%"), " level.", " The estimated critical value of the Malik_test at the ", paste0(100 * (alpha), "%"), " level with ", nsim, " Monte Carlo samples is ", round(qMalik, 4), ".")
       }
     } else {
       str <- paste("A report has not been wanted! To have a report, change argument 'report' to TRUE.")

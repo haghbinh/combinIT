@@ -8,8 +8,8 @@
 #' @param alpha a numeric value, the level of the test. The default value is 0.05.
 #' @param report logical: if \code{TRUE} the result of the test is reported at the \code{alpha} level.
 #'
-#' @return An object of the class \code{ITtest}, which is a list inducing following components::
-#' \item{pvalue_exact}{An exact Monte Carlo p-value when \eqn{p>2}. For \eqn{p=2} an exact p-value is calculated.}
+#' @return An object of the class \code{ITtest}, which is a list inducing following components:
+#' \item{pvalue_exact}{An exact Monte Carlo p-value when \eqn{p>2}. For \eqn{p=2}, an exact p-value is calculated.}
 #' \item{pvalue_appro}{An chi-squared asymptotic p-value.}
 #' \item{statistic}{The value of test statistic.}
 #' \item{Nsim}{The number of Monte Carlo samples that are used to estimate p-value.}
@@ -75,13 +75,13 @@ Boik_test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE) {
         str <- Result_Boik(x, nsim = nsim, alpha = alpha, simu = simu)
       } else {
         if (p == 2) {
-          str <- paste("The Boik_test could not detect any significant interaction.", "The exact critical value of the Boik_test is", round(qBoik, 4), ".")
+          str <- paste0("The Boik_test could not detect any significant interaction at the ", paste0(100 * (alpha), "%"), " level.", " The exact critical value of the Boik_test at the ", paste0(100 * (alpha), "%"), " level is ", round(qBoik, 4), ".")
         }
         if (p > 2) {
-          str <- paste("The Boik_test could not detect any significant interaction.", "The estimated critical value of the Boik_test with", nsim, "Monte Carlo samples is", round(qBoik, 4), ".")
+          str <- paste0("The Boik_test could not detect any significant interaction at the ", paste0(100 * (alpha), "%"), " level.", " The exact critical value of the Boik_test at the ", paste0(100 * (alpha), "%"), " level is ", round(qBoik, 4), ".")
         }
         if (p == 1) {
-          str <- paste("The Boik_test could not detect any significant interaction.", "The exact critical value of the Boik_test is", 1, ".")
+          str <- paste0("The Boik_test could not detect any significant interaction at the ", paste0(100 * (alpha), "%"), " level.", " The exact critical value of the Boik_test is ", 1, ".")
         }
       }
     } else {

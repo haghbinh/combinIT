@@ -2,7 +2,7 @@
 % Please edit documentation in R/CI_test.R
 \name{CI_test}
 \alias{CI_test}
-\title{Combined P-value Interaction Test}
+\title{Combined Interaction Test}
 \usage{
 CI_test(
   x,
@@ -27,10 +27,10 @@ CI_test(
 
 \item{report}{logical: if \code{TRUE} the result of the test is reported at the \code{alpha} level.}
 
-\item{Elapsed.time}{logical: if \code{TRUE} the progress will be printed in the console.}
+\item{Elapsed_time}{logical: if \code{TRUE} the progress will be printed in the console.}
 }
 \value{
-An object of the class \code{combtest}, which is a list inducing following components::
+An object of the class \code{combtest}, which is a list inducing following components:
 \item{nsim}{The number of Monte Carlo samples that are used to estimate p-value.}
 \item{Piepho_pvalue}{The p-value of Piepho's (1994) test.}
 \item{Piepho_Stat}{The value of Piepho's (1994) test statistic.}
@@ -61,13 +61,12 @@ There are four combination methods:
 Bonferroni, Sidak, Jacobi expansion, and Gaussian Copula. The results of these four combined tests are also reported. If there is a significant interaction, the type of interaction is also provided.
 }
 \details{
-The data matrix is divided based on the row of the data matrix for \code{KKSA.test} and \code{Franck.test}. Note that \code{KKSA.test} is not applicable when \eqn{a} is less than four. \code{Franck.test} and \code{Piepho.test} are not applicable when \eqn{a} is less than three. This function needs \code{mvtnorm} package.
+The data matrix is divided based on the row of the data matrix for \code{KKSA_test} and \code{Franck_test}. Note that \code{KKSA_test} is not applicable when \eqn{a} is less than four. \code{Franck_test} and \code{Piepho_test} are not applicable when \eqn{a} is less than three. This function needs \code{mvtnorm} package.
 }
 \examples{
-\dontrun{
 data(CNV)
 CI_test(CNV, nsim = 1000, Elapsed_time = FALSE)
-}
+
 }
 \references{
 Shenavari, Z., Kharrati-Kopaei, M. (2018). A Method for Testing Additivity in

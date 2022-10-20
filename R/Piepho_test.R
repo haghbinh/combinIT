@@ -72,7 +72,7 @@ Piepho_test <- function(x, nsim = 10000, alpha = 0.05, report = TRUE) {
         if (pieph < alpha) {
           str <- Result_Piepho(x, nsim = nsim, alpha = alpha, simu = simu)
         } else {
-          str <- paste("The Piepho_test could not detect any significant interaction.", "The estimated critical value of the Piepho_test with", nsim, "Monte Carlo samples is", round(qPiepho, 4), ".")
+          str <- paste0("The Piepho_test could not detect any significant interaction at the ", paste0(100 * (alpha), "%"), " level.", " The estimated critical value of the Piepho_test at the ", paste0(100 * (alpha), "%"), " level with ", nsim, " Monte Carlo samples is ", round(qPiepho, 4), ".")
         }
       } else {
         str <- paste("A report has not been wanted! To have a report, change argument 'report' to TRUE.")
