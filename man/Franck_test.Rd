@@ -61,7 +61,7 @@ Franck et al. (2013) derived a test statistic based on the â€œhidden additivityâ
 }
 \examples{
 data(CNV)
-Franck.test(CNV, nsim = 1000, Elapsed.time = FALSE)
+Franck_test(CNV, nsim = 1000, Elapsed.time = FALSE)
 
 }
 \references{

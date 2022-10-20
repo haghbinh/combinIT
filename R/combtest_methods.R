@@ -15,5 +15,5 @@ print.combtest <- function(x, ...) {
   msg15 <- paste("------------------------------------------------", "\n")
   msg13 <- paste("The result of the combined test at the", paste0(100 * (x$Level), "%"), "level:", "\n")
   msg14 <- paste(x$Result, "\n")
-  cat(msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9, msg10, msg11, msg12, msg15, msg13, msg14)
+  cat(justify(msg1), justify(msg2), justify(msg3), justify(msg4), justify(msg5), justify(msg6), justify(msg7), justify(msg8), justify(msg9), justify(msg10), justify(msg11), justify(msg12), justify(msg15), justify(msg13), justify(msg14))
 }

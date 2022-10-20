@@ -9,5 +9,5 @@ print.ITtest <- function(x, ...) {
   msg9 <- paste("---------------------------------------", "\n")
   msg7 <- paste("The result of the test at the", paste0(100 * (x$Level), "%"), "level:", "\n")
   msg8 <- paste(x$Result, "\n")
-  cat(msg1, msg2, msg3, msg4, msg5, msg6, msg9, msg7, msg8)
+  cat(justify(msg1), justify(msg2), justify(msg3), justify(msg4), justify(msg5), justify(msg6), justify(msg9), justify(msg7), justify(msg8))
 }

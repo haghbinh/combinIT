@@ -47,7 +47,7 @@
 #'
 #' @examples
 #' data(CNV)
-#' Franck.test(CNV, nsim = 1000, Elapsed.time = FALSE)
+#' Franck_test(CNV, nsim = 1000, Elapsed.time = FALSE)
 #'
 #' @importFrom stats pchisq pf qnorm var
 #' @export
