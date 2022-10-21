@@ -149,10 +149,10 @@ double  M_f(arma::mat x) {            // Hossein's Codes....
   arma::mat  Xi(n,3,fill::zeros);
   for(int i=0; i<n;i++)
   {
-    if(abs(r(i)-centers(0,1)) < abs(r(i)-centers(0,0)) && abs(r(i)-centers(0,1)) < abs(r(i)-centers(0,2)))
+    if(fabs(r(i)-centers(0,1)) < fabs(r(i)-centers(0,0)) && fabs(r(i)-centers(0,1)) < fabs(r(i)-centers(0,2)))
     {
       Xi(i,1)=1;
-    } else if(abs(r(i)-centers(0,2)) < abs(r(i)-centers(0,0)) && abs(r(i)-centers(0,2)) < abs(r(i)-centers(0,1)))
+    } else if(fabs(r(i)-centers(0,2)) < fabs(r(i)-centers(0,0)) && fabs(r(i)-centers(0,2)) < fabs(r(i)-centers(0,1)))
     {
       Xi(i,2)=1;
     } else
@@ -642,10 +642,10 @@ List bmp_f(arma::mat x) {            // Hossein's Codes....
   arma::mat  Xi(n,3,fill::zeros);
   for(int i=0; i<n;i++)
   {
-    if(abs(r(i)-centers(0,1)) < abs(r(i)-centers(0,0)) && abs(r(i)-centers(0,1)) < abs(r(i)-centers(0,2)))
+    if(fabs(r(i)-centers(0,1)) < fabs(r(i)-centers(0,0)) && fabs(r(i)-centers(0,1)) < fabs(r(i)-centers(0,2)))
     {
       Xi(i,1)=1;
-    } else if(abs(r(i)-centers(0,2)) < abs(r(i)-centers(0,0)) && abs(r(i)-centers(0,2)) < abs(r(i)-centers(0,1)))
+    } else if(fabs(r(i)-centers(0,2)) < fabs(r(i)-centers(0,0)) && fabs(r(i)-centers(0,2)) < fabs(r(i)-centers(0,1)))
     {
       Xi(i,2)=1;
     } else
