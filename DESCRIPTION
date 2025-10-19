@@ -1,7 +1,7 @@
 Package: combinIT
 Type: Package
 Title: A Combined Interaction Test for Unreplicated Two-Way Tables
-Version: 2.0.0
+Version: 2.0.1
 Authors@R: c(
     person("Zahra", "Shenavari", email = "zshenavari@yahoo.com", role = "aut"),
     person("Hossein", "Haghbin", email = "haghbin@pgu.ac.ir",role = c("aut", "cre"),
@@ -17,7 +17,7 @@ BugReports: https://github.com/haghbinh/combinIT/issues
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: TRUE
-RoxygenNote: 7.2.0
+RoxygenNote: 7.3.2
 Imports: Rcpp,mvtnorm
 Suggests: MASS,
           Matrix,
